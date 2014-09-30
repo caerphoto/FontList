@@ -398,6 +398,7 @@
 				1E15287219CF1CDF004B6372 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1E15287319CF1CDF004B6372 /* Build configuration list for PBXNativeTarget "FontListTests" */ = {
 			isa = XCConfigurationList;
@@ -406,6 +407,7 @@
 				1E15287519CF1CDF004B6372 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
