@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AFColoredTableCellView.h"
 
 @interface AppDelegate ()
 
@@ -14,6 +15,11 @@
 @end
 
 @implementation AppDelegate
+
+@synthesize previewText;
+@synthesize fontSize;
+@synthesize fontFamilies;
+@synthesize filteredFontFamilies;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
@@ -57,38 +63,40 @@
     [self.mainListView reloadData];
 }
 
+- (IBAction)takeColorFrom:(NSColorWell *)sender {
+    // Don't need to do anything else - the view rendering code will handle it.
+    [self.mainListView reloadData];
+}
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)mainFontList {
-    NSUInteger count = [fontFamilies count];
-    return count;
+    return [fontFamilies count];
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    return lroundf(fontSize * 1.5);
+    return fontSize * 1.5;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-
-    NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
     
-    NSString *contentText;
     NSString *fontName = [fontFamilies objectAtIndex:row];
-    
-    if ([tableColumn.identifier isEqualToString:@"NameColumn"]) {
-        contentText = fontName;
-    } else {
-        cellView.textField.font = [NSFont fontWithName:fontName size:fontSize];
-        //cellView.textField.font
 
-        if (previewText == nil) {
-            contentText = [[self.previewTextField cell] placeholderString];
-        } else {
-            contentText = [previewText substringFromIndex:0];
-        }
+    if ([tableColumn.identifier isEqualToString:@"NameColumn"]) {
+        NSTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+        result.textField.stringValue = fontName;
+        return result;
         
+    } else {
+        AFColoredTableCellView *result = [[AFColoredTableCellView alloc] init];
+        result.backgroundFill = self.backgroundColorWell.color;
+        result.textColor = self.textColorWell.color;
+        result.font = fontName;//[NSFont fontWithName:fontName size:fontSize];
+        result.fontSize = (CGFloat)fontSize;
+        result.text = previewText;
+
+        return result;
     }
-    
-    cellView.textField.stringValue = contentText;
-    return cellView;
+
+    return nil;
 }
 
 @end

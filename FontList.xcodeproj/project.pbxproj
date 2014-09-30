@@ -12,6 +12,8 @@
 		1E15285E19CF1CDF004B6372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E15285D19CF1CDF004B6372 /* Images.xcassets */; };
 		1E15286119CF1CDF004B6372 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15285F19CF1CDF004B6372 /* MainMenu.xib */; };
 		1E15286D19CF1CDF004B6372 /* FontListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15286C19CF1CDF004B6372 /* FontListTests.m */; };
+		1E2FE4F119DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */; };
+		1E2FE4F419DB557E00D7F0D1 /* AFColoredTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,10 @@
 		1E15286619CF1CDF004B6372 /* FontListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FontListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E15286B19CF1CDF004B6372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E15286C19CF1CDF004B6372 /* FontListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FontListTests.m; sourceTree = "<group>"; };
+		1E2FE4EF19DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
+		1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
+		1E2FE4F219DB557E00D7F0D1 /* AFColoredTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFColoredTableCellView.h; sourceTree = "<group>"; };
+		1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFColoredTableCellView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,11 +82,15 @@
 		1E15285519CF1CDF004B6372 /* FontList */ = {
 			isa = PBXGroup;
 			children = (
+				1E2FE4EF19DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.h */,
+				1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */,
 				1E15285A19CF1CDF004B6372 /* AppDelegate.h */,
 				1E15285B19CF1CDF004B6372 /* AppDelegate.m */,
 				1E15285D19CF1CDF004B6372 /* Images.xcassets */,
 				1E15285F19CF1CDF004B6372 /* MainMenu.xib */,
 				1E15285619CF1CDF004B6372 /* Supporting Files */,
+				1E2FE4F219DB557E00D7F0D1 /* AFColoredTableCellView.h */,
+				1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */,
 			);
 			path = FontList;
 			sourceTree = "<group>";
@@ -210,6 +220,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E2FE4F119DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m in Sources */,
+				1E2FE4F419DB557E00D7F0D1 /* AFColoredTableCellView.m in Sources */,
 				1E15285C19CF1CDF004B6372 /* AppDelegate.m in Sources */,
 				1E15285919CF1CDF004B6372 /* main.m in Sources */,
 			);
