@@ -12,7 +12,7 @@
 
 @property (assign) NSColor *textColor;
 @property (assign) NSColor *backgroundFill;
-@property (assign) NSString *font;
+@property (assign) NSString *fontName;
 @property (assign) CGFloat fontSize;
 @property (assign) NSString *text;
 

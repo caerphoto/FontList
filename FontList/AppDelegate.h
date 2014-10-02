@@ -16,14 +16,15 @@
 @property (weak) IBOutlet NSTableCellView *listCell;
 @property (weak) IBOutlet NSColorWell *textColorWell;
 @property (weak) IBOutlet NSColorWell *backgroundColorWell;
-
-
+@property (weak) IBOutlet NSTextField *filterField;
+@property (weak) IBOutlet NSTextField *statusBar;
 
 @property (copy) NSString *previewText;
 @property (copy) NSArray *fontFamilies;
-@property (copy) NSArray *filteredFontFamilies;
+@property (copy) NSMutableArray *filteredFontFamilies;
 @property (assign) NSUInteger fontSize;
 
+- (IBAction)takeFilterFrom:(id)sender;
 - (IBAction)takePreviewTextFrom:(id)sender;
 - (IBAction)takeFontSizeFrom:(id)sender;
 - (IBAction)takeColorFrom:(NSColorWell *)sender;

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AFColoredTableCellView.h"
+#import "RegExCategories.h"
 
 @interface AppDelegate ()
 
@@ -25,11 +26,15 @@
     
     NSFontManager *manager = [NSFontManager sharedFontManager];
     NSArray *unsortedSysFonts = [manager availableFontFamilies];
+    
     fontFamilies = [unsortedSysFonts sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
     unsortedSysFonts = nil;
+    
+    filteredFontFamilies = [fontFamilies mutableCopy];
 
     previewText = @"The quick brown fox jumps over the lazy dog";
     fontSize = [self.fontSizeField integerValue];
+    [self.mainListView setBackgroundColor:self.backgroundColorWell.color];
     
     [self.mainListView setDelegate:(id)self];
     [self.mainListView setDataSource:(id)self];
@@ -38,6 +43,24 @@
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
     fontFamilies = nil;
+}
+
+- (IBAction)takeFilterFrom:(id)sender {
+    if ([[sender stringValue] isEqualToString:@""]) {
+        filteredFontFamilies = [fontFamilies mutableCopy];
+    } else {
+        NSString *regexString = [NSString stringWithFormat:@"%@", [sender stringValue]];
+        Rx *regex = [regexString toRxIgnoreCase:YES];
+        
+        [filteredFontFamilies removeAllObjects];
+        for (id font in fontFamilies) {
+            if ([font isMatch:regex]) {
+                [filteredFontFamilies addObject:font];
+            }
+        }
+    }
+    
+    [self.mainListView reloadData];
 }
 
 - (IBAction)takePreviewTextFrom:(id)sender {
@@ -64,12 +87,16 @@
 }
 
 - (IBAction)takeColorFrom:(NSColorWell *)sender {
-    // Don't need to do anything else - the view rendering code will handle it.
+    if ([sender.identifier isEqualToString:@"BackgroundColor"]) {
+        [self.mainListView setBackgroundColor:self.backgroundColorWell.color];
+    }
     [self.mainListView reloadData];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)mainFontList {
-    return [fontFamilies count];
+    NSUInteger count = [filteredFontFamilies count];
+    self.statusBar.stringValue = [NSString stringWithFormat:@"%lu fonts", (unsigned long)count];
+    return count;
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
@@ -78,7 +105,7 @@
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     
-    NSString *fontName = [fontFamilies objectAtIndex:row];
+    NSString *fontName = [filteredFontFamilies objectAtIndex:row];
 
     if ([tableColumn.identifier isEqualToString:@"NameColumn"]) {
         NSTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
@@ -86,10 +113,10 @@
         return result;
         
     } else {
-        AFColoredTableCellView *result = [[AFColoredTableCellView alloc] init];
-        result.backgroundFill = self.backgroundColorWell.color;
+        AFColoredTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+//        result.backgroundFill = self.backgroundColorWell.color;
         result.textColor = self.textColorWell.color;
-        result.font = fontName;//[NSFont fontWithName:fontName size:fontSize];
+        result.fontName = fontName;
         result.fontSize = (CGFloat)fontSize;
         result.text = previewText;
 

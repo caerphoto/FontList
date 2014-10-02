@@ -12,6 +12,7 @@
 		1E15285E19CF1CDF004B6372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E15285D19CF1CDF004B6372 /* Images.xcassets */; };
 		1E15286119CF1CDF004B6372 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15285F19CF1CDF004B6372 /* MainMenu.xib */; };
 		1E15286D19CF1CDF004B6372 /* FontListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15286C19CF1CDF004B6372 /* FontListTests.m */; };
+		1E2442A319DD708D00493263 /* RegExCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2442A219DD708D00493263 /* RegExCategories.m */; };
 		1E2FE4F119DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */; };
 		1E2FE4F419DB557E00D7F0D1 /* AFColoredTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,8 @@
 		1E15286619CF1CDF004B6372 /* FontListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FontListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E15286B19CF1CDF004B6372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E15286C19CF1CDF004B6372 /* FontListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FontListTests.m; sourceTree = "<group>"; };
+		1E2442A119DD708D00493263 /* RegExCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExCategories.h; sourceTree = "<group>"; };
+		1E2442A219DD708D00493263 /* RegExCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegExCategories.m; sourceTree = "<group>"; };
 		1E2FE4EF19DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		1E2FE4F219DB557E00D7F0D1 /* AFColoredTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFColoredTableCellView.h; sourceTree = "<group>"; };
@@ -82,6 +85,8 @@
 		1E15285519CF1CDF004B6372 /* FontList */ = {
 			isa = PBXGroup;
 			children = (
+				1E2442A119DD708D00493263 /* RegExCategories.h */,
+				1E2442A219DD708D00493263 /* RegExCategories.m */,
 				1E2FE4EF19DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.h */,
 				1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */,
 				1E15285A19CF1CDF004B6372 /* AppDelegate.h */,
@@ -220,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E2442A319DD708D00493263 /* RegExCategories.m in Sources */,
 				1E2FE4F119DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m in Sources */,
 				1E2FE4F419DB557E00D7F0D1 /* AFColoredTableCellView.m in Sources */,
 				1E15285C19CF1CDF004B6372 /* AppDelegate.m in Sources */,
@@ -340,6 +346,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FontList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -351,6 +358,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FontList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
