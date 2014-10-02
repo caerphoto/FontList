@@ -674,8 +674,8 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="FontList" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+        <window title="FontList" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="AFFontList" animationBehavior="default" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="830" y="692" width="648" height="530"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
@@ -685,7 +685,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="98" horizontalPageScroll="10" verticalLineScroll="98" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ik9-Ru-aY8">
-                        <rect key="frame" x="0.0" y="20" width="648" height="432"/>
+                        <rect key="frame" x="0.0" y="21" width="648" height="431"/>
                         <clipView key="contentView" id="g0k-lN-VyX">
                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -771,27 +771,16 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kKk-i0-q8I">
-                        <rect key="frame" x="-2" y="0.0" width="652" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="18" id="hXT-Se-f1V"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="z7h-Vq-FTk">
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="dhq-1r-lbo">
-                        <rect key="frame" x="0.0" y="460" width="648" height="70"/>
+                        <rect key="frame" x="0.0" y="452" width="648" height="78"/>
                         <subviews>
                             <colorWell identifier="TextColor" translatesAutoresizingMaskIntoConstraints="NO" id="uAR-uZ-wHK">
-                                <rect key="frame" x="130" y="30" width="44" height="23"/>
+                                <rect key="frame" x="220" y="39" width="44" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="4bx-f7-d8C"/>
                                     <constraint firstAttribute="height" constant="23" id="dE1-JO-jcR"/>
                                 </constraints>
-                                <color key="color" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="color" red="0.16680676284615381" green="0.20923297746359548" blue="0.3296055947580645" alpha="1" colorSpace="deviceRGB"/>
                                 <accessibility description="Select a colour for the preview text"/>
                                 <connections>
                                     <accessibilityConnection property="title" destination="4EI-AW-fOu" id="hbv-yS-C56"/>
@@ -799,46 +788,29 @@
                                 </connections>
                             </colorWell>
                             <button toolTip="Fonts with no bold weight will not be shown" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LOn-e2-oIE">
-                                <rect key="frame" x="18" y="33" width="50" height="18"/>
+                                <rect key="frame" x="18" y="41" width="50" height="18"/>
                                 <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="bNB-L3-4Zv">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4EI-AW-fOu">
-                                <rect key="frame" x="180" y="34" width="75" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text colour" id="7gS-TH-cFS">
+                                <rect key="frame" x="135" y="42" width="79" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text colour:" id="7gS-TH-cFS">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <button toolTip="Fonts with no italic style will not be shown" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2g1-gZ-doc">
-                                <rect key="frame" x="72" y="33" width="52" height="18"/>
+                                <rect key="frame" x="72" y="41" width="52" height="18"/>
                                 <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="NC7-uR-1aq">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <colorWell identifier="BackgroundColor" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfy-Te-1TT">
-                                <rect key="frame" x="261" y="30" width="44" height="23"/>
-                                <color key="color" red="1" green="0.99694169620404094" blue="0.96572580645161288" alpha="1" colorSpace="deviceRGB"/>
-                                <accessibility description="Select a colour for the font list background"/>
-                                <connections>
-                                    <accessibilityConnection property="title" destination="NhO-9w-4n1" id="9RA-2X-RCL"/>
-                                    <action selector="takeColorFrom:" target="Voe-Tx-rLC" id="qBP-mw-0xt"/>
-                                </connections>
-                            </colorWell>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X9U-22-E5Q">
-                                <rect key="frame" x="152" y="2" width="80" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Preview text" id="3Nc-gP-gj8">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField identifier="FontSizeField" toolTip="Set preview font size" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYA-H2-xpK">
-                                <rect key="frame" x="85" y="0.0" width="46" height="22"/>
+                                <rect key="frame" x="89" y="8" width="46" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" title="30" drawsBackground="YES" id="GAM-ZP-xTG">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="9nC-Dz-uu3"/>
                                     <font key="font" metaFont="system"/>
@@ -851,15 +823,15 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eel-qV-Og1">
-                                <rect key="frame" x="18" y="2" width="61" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font size" id="SDe-bV-vlb">
+                                <rect key="frame" x="18" y="10" width="65" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font size:" id="SDe-bV-vlb">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <stepper identifier="FontSizeStepper" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTh-g5-gPe">
-                                <rect key="frame" x="130" y="-3" width="19" height="27"/>
+                                <rect key="frame" x="134" y="5" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="500" doubleValue="30" id="y0K-oJ-kmf"/>
                                 <accessibility description="Increments or decrements the preview font size by 1 point"/>
                                 <connections>
@@ -867,13 +839,13 @@
                                 </connections>
                             </stepper>
                             <searchField toolTip="Search for fonts by name" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7O5-J6-y5c">
-                                <rect key="frame" x="440" y="31" width="188" height="22"/>
+                                <rect key="frame" x="455" y="39" width="173" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="2mk-z7-qFJ"/>
-                                    <constraint firstAttribute="width" constant="188" id="I65-Pr-O1O"/>
+                                    <constraint firstAttribute="width" constant="173" id="I65-Pr-O1O"/>
                                 </constraints>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="All" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="Fmf-yA-re2">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </searchFieldCell>
@@ -883,7 +855,7 @@
                                 </connections>
                             </searchField>
                             <textField identifier="PreviewTextField" toolTip="Text to display in preview" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="du1-xn-zVc">
-                                <rect key="frame" x="238" y="0.0" width="388" height="22"/>
+                                <rect key="frame" x="261" y="8" width="365" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" placeholderString="The quick brown fox jumps over the lazy dog" drawsBackground="YES" usesSingleLineMode="YES" id="wao-sc-rl9">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -895,40 +867,79 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NhO-9w-4n1">
-                                <rect key="frame" x="311" y="34" width="123" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Background colour" id="fRZ-OH-d3U">
+                                <rect key="frame" x="270" y="42" width="127" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Background colour:" id="fRZ-OH-d3U">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X9U-22-E5Q">
+                                <rect key="frame" x="170" y="10" width="85" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Preview text:" id="3Nc-gP-gj8">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <colorWell identifier="BackgroundColor" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfy-Te-1TT">
+                                <rect key="frame" x="403" y="39" width="44" height="23"/>
+                                <color key="color" red="1" green="0.99694169620404094" blue="0.96572580645161288" alpha="1" colorSpace="deviceRGB"/>
+                                <accessibility description="Select a colour for the font list background"/>
+                                <connections>
+                                    <accessibilityConnection property="title" destination="NhO-9w-4n1" id="9RA-2X-RCL"/>
+                                    <action selector="takeColorFrom:" target="Voe-Tx-rLC" id="qBP-mw-0xt"/>
+                                </connections>
+                            </colorWell>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="du1-xn-zVc" secondAttribute="trailing" constant="22" id="406-ku-dwr"/>
                             <constraint firstAttribute="trailing" secondItem="7O5-J6-y5c" secondAttribute="trailing" constant="20" id="HyB-nV-IoZ"/>
-                            <constraint firstItem="uAR-uZ-wHK" firstAttribute="top" secondItem="dhq-1r-lbo" secondAttribute="top" constant="17" id="Mhb-RB-6Fg"/>
+                            <constraint firstItem="uAR-uZ-wHK" firstAttribute="top" secondItem="dhq-1r-lbo" secondAttribute="top" constant="16" id="Mhb-RB-6Fg"/>
                             <constraint firstItem="7O5-J6-y5c" firstAttribute="top" secondItem="dhq-1r-lbo" secondAttribute="top" constant="17" id="Rb7-Ur-3Jl"/>
-                            <constraint firstItem="du1-xn-zVc" firstAttribute="leading" secondItem="dhq-1r-lbo" secondAttribute="leading" constant="238" id="UJt-76-Kdr"/>
-                            <constraint firstItem="uAR-uZ-wHK" firstAttribute="leading" secondItem="dhq-1r-lbo" secondAttribute="leading" constant="130" id="b0B-2d-fQd"/>
+                            <constraint firstItem="du1-xn-zVc" firstAttribute="leading" secondItem="dhq-1r-lbo" secondAttribute="leading" constant="261" id="UJt-76-Kdr"/>
+                            <constraint firstItem="uAR-uZ-wHK" firstAttribute="leading" secondItem="dhq-1r-lbo" secondAttribute="leading" constant="220" id="b0B-2d-fQd"/>
                             <constraint firstItem="du1-xn-zVc" firstAttribute="top" secondItem="dhq-1r-lbo" secondAttribute="top" constant="48" id="xCL-bP-cX3"/>
-                            <constraint firstAttribute="height" constant="70" id="yT9-ug-lO4"/>
+                            <constraint firstAttribute="height" constant="78" id="yT9-ug-lO4"/>
+                        </constraints>
+                    </customView>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="uYg-TV-umk" customClass="BKGradientView">
+                        <rect key="frame" x="0.0" y="0.0" width="648" height="21"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kKk-i0-q8I">
+                                <rect key="frame" x="-2" y="0.0" width="652" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="hXT-Se-f1V"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="z7h-Vq-FTk">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="kKk-i0-q8I" firstAttribute="leading" secondItem="uYg-TV-umk" secondAttribute="leading" id="6Ac-98-M8z"/>
+                            <constraint firstAttribute="trailing" secondItem="kKk-i0-q8I" secondAttribute="trailing" id="7Qs-Ib-fr7"/>
+                            <constraint firstAttribute="bottom" secondItem="kKk-i0-q8I" secondAttribute="bottom" id="RA0-up-6A4"/>
+                            <constraint firstAttribute="height" constant="21" id="xiP-uU-iwf"/>
                         </constraints>
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="kKk-i0-q8I" secondAttribute="trailing" id="3FH-kT-wko"/>
                     <constraint firstItem="Ik9-Ru-aY8" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="3Mx-a1-sNy"/>
                     <constraint firstAttribute="trailing" secondItem="dhq-1r-lbo" secondAttribute="trailing" id="6bc-Ke-Cdg"/>
-                    <constraint firstItem="kKk-i0-q8I" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="BWV-Qs-ZE1"/>
                     <constraint firstItem="Ik9-Ru-aY8" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="78" id="DXo-qo-DYp"/>
-                    <constraint firstAttribute="bottom" secondItem="Ik9-Ru-aY8" secondAttribute="bottom" constant="20" id="K9F-T9-49I"/>
+                    <constraint firstAttribute="bottom" secondItem="Ik9-Ru-aY8" secondAttribute="bottom" constant="21" id="K9F-T9-49I"/>
                     <constraint firstItem="dhq-1r-lbo" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="Nds-zI-Zvd"/>
+                    <constraint firstAttribute="bottom" secondItem="uYg-TV-umk" secondAttribute="bottom" id="T5D-fN-XKa"/>
+                    <constraint firstAttribute="trailing" secondItem="uYg-TV-umk" secondAttribute="trailing" id="Xl8-G5-bYb"/>
+                    <constraint firstItem="uYg-TV-umk" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="hkR-EC-esT"/>
                     <constraint firstAttribute="trailing" secondItem="Ik9-Ru-aY8" secondAttribute="trailing" id="itF-X3-WqB"/>
-                    <constraint firstAttribute="bottom" secondItem="kKk-i0-q8I" secondAttribute="bottom" id="sCK-Al-dva"/>
                     <constraint firstItem="dhq-1r-lbo" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="xVw-20-f3T"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="456" y="445"/>
+            <point key="canvasLocation" x="443" y="123"/>
         </window>
     </objects>
 </document>

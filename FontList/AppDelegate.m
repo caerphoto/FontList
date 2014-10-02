@@ -23,19 +23,19 @@
 @synthesize filteredFontFamilies;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
+
     NSFontManager *manager = [NSFontManager sharedFontManager];
     NSArray *unsortedSysFonts = [manager availableFontFamilies];
-    
+
     fontFamilies = [unsortedSysFonts sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
     unsortedSysFonts = nil;
-    
+
     filteredFontFamilies = [fontFamilies mutableCopy];
 
     previewText = @"The quick brown fox jumps over the lazy dog";
     fontSize = [self.fontSizeField integerValue];
     [self.mainListView setBackgroundColor:self.backgroundColorWell.color];
-    
+
     [self.mainListView setDelegate:(id)self];
     [self.mainListView setDataSource:(id)self];
 }
@@ -51,7 +51,7 @@
     } else {
         NSString *regexString = [NSString stringWithFormat:@"%@", [sender stringValue]];
         Rx *regex = [regexString toRxIgnoreCase:YES];
-        
+
         [filteredFontFamilies removeAllObjects];
         for (id font in fontFamilies) {
             if ([font isMatch:regex]) {
@@ -59,7 +59,7 @@
             }
         }
     }
-    
+
     [self.mainListView reloadData];
 }
 
@@ -69,19 +69,19 @@
         newText = [self.previewTextField.cell placeholderString];
     }
     previewText = newText;
-    
+
     [self.mainListView reloadData];
 }
 
 - (IBAction)takeFontSizeFrom:(id)sender {
     NSInteger newValue = [sender integerValue];
-    
+
     if ([[sender identifier] isEqualToString:@"FontSizeField"]) {
         self.fontSizeStepper.integerValue = newValue;
     } else {
         self.fontSizeField.integerValue = newValue;
     }
-    
+
     fontSize = newValue;
     [self.mainListView reloadData];
 }
@@ -104,14 +104,14 @@
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    
+
     NSString *fontName = [filteredFontFamilies objectAtIndex:row];
 
     if ([tableColumn.identifier isEqualToString:@"NameColumn"]) {
         NSTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
         result.textField.stringValue = fontName;
         return result;
-        
+
     } else {
         AFColoredTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
         result.textColor = self.textColorWell.color;
