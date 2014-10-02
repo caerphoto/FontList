@@ -15,15 +15,13 @@
     
     NSRect bounds = [self bounds];
     NSPoint textOrigin = NSMakePoint(bounds.origin.x, bounds.origin.y);
-    //bounds.origin.y += 1;
+    
     textOrigin.x += 5;
-
-    /*
-    [self.backgroundFill setFill];
-    NSRectFill(bounds);
-     */
     
     NSFont *font = [NSFont fontWithName:self.fontName size:self.fontSize];
+
+    // NOTE: the descender is almost always negative
+    textOrigin.y = ((bounds.size.height - self.fontSize) / 2) + font.descender + 2;
     
     NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 font, NSFontAttributeName,

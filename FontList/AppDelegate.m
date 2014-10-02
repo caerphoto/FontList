@@ -100,7 +100,7 @@
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    return fontSize * 1.5;
+    return fontSize * 1.8;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
@@ -114,7 +114,6 @@
         
     } else {
         AFColoredTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-//        result.backgroundFill = self.backgroundColorWell.color;
         result.textColor = self.textColorWell.color;
         result.fontName = fontName;
         result.fontSize = (CGFloat)fontSize;
