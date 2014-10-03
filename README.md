@@ -8,7 +8,5 @@ what I'm doing, but it seems to be working.
 
 # TODO
 
-* bold/italic checkboxes
 * a nice icon (or even a bad one, anything but the default)
 * fix jankiness and other performance issues
-* more preview options (multi-line, for example)

@@ -21,6 +21,9 @@
 @property (weak) IBOutlet NSButton *chkBold;
 @property (weak) IBOutlet NSTextField *statusBar;
 
+@property (weak) IBOutlet NSPanel *previewPanel;
+@property (unsafe_unretained) IBOutlet NSTextView *detailedPreviewEditor;
+
 @property (copy) NSString *filterText;
 @property (copy) NSString *previewText;
 @property (copy) NSArray *fontFamilies;
@@ -32,11 +35,17 @@
 - (IBAction)takeFontSizeFrom:(id)sender;
 - (IBAction)takeColorFrom:(NSColorWell *)sender;
 - (IBAction)styleFilterWasChangedBy:(id)sender;
+- (IBAction)takeFontNameFrom:(id)sender;
 
 - (void)loadSettings;
+- (void)saveSettings;
+- (void)applyFilters;
+- (NSInteger)listIndexFromFontName:(NSString *)fontName;
+- (void)updatePanelWithFontName:(NSString *)fontName;
+- (void)updateUI;
 - (NSString *)styleStringFromFlags:(NSUInteger)flags;
 - (NSUInteger)styleFlagsForFontName:(NSString *)fontName;
-- (void)applyFilters;
+- (NSFont *)fontFromCurrentStateWithName:(NSString *)fontName;
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)mainFontList;
 - (NSView *)tableView:(NSTableView *)mainFontList viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row;

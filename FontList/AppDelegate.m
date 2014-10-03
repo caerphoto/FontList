@@ -71,12 +71,18 @@ const NSUInteger MIN_SIZE = 16;
 
 - (void)saveSettings {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    if (![self.filterField.stringValue isEqualToString:@""]) {
+    if ([self.filterField.stringValue isEqualToString:@""]) {
+        [settings removeObjectForKey:@"filterText"];
+    } else {
         [settings setObject:self.filterField.stringValue forKey:@"filterText"];
     }
-    if (![self.previewTextField.stringValue isEqualToString:@""]) {
+
+    if ([self.previewTextField.stringValue isEqualToString:@""]) {
+        [settings removeObjectForKey:@"previewText"];
+    } else {
         [settings setObject:self.previewTextField.stringValue forKey:@"previewText"];
     }
+
     [settings setInteger:self.fontSizeStepper.integerValue forKey:@"fontSize"];
     [settings setBool:(self.chkItalic.state == NSOnState) forKey:@"italic"];
     [settings setBool:(self.chkBold.state == NSOnState) forKey:@"bold"];
@@ -87,8 +93,43 @@ const NSUInteger MIN_SIZE = 16;
     [settings setObject:colorData forKey:@"textColor"];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (NSInteger)listIndexFromFontName:(NSString *)fontName {
+    if (fontName == nil) {
+        return -1;
+    }
 
+    for (NSUInteger index = 0; index < self.filteredFontFamilies.count; index += 1) {
+        if ([self.filteredFontFamilies[index] isEqualToString:fontName]) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+
+- (void)updatePanelWithFontName:(NSString *)fontName {
+    NSFont *font;
+
+    if (fontName == nil) {
+        font = [self fontFromCurrentStateWithName:self.detailedPreviewEditor.font.familyName];
+    } else {
+        font = [self fontFromCurrentStateWithName:fontName];
+    }
+
+    self.detailedPreviewEditor.font = font;
+    self.detailedPreviewEditor.textColor = self.textColorWell.color;
+    self.detailedPreviewEditor.backgroundColor = self.backgroundColorWell.color;
+    self.previewPanel.title = font.familyName;
+}
+
+- (void)updateUI {
+    [self updatePanelWithFontName:nil];
+    [self.mainListView reloadData];
+
+    [self saveSettings];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     NSFontManager *manager = [NSFontManager sharedFontManager];
     NSArray *unsortedSysFonts = [manager availableFontFamilies];
 
@@ -104,10 +145,11 @@ const NSUInteger MIN_SIZE = 16;
 
     [self.mainListView setDelegate:(id)self];
     [self.mainListView setDataSource:(id)self];
+    [self.mainListView setDoubleAction:@selector(takeFontNameFrom:)];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
+    [self saveSettings];
     fontFamilies = nil;
 }
 
@@ -169,6 +211,13 @@ const NSUInteger MIN_SIZE = 16;
 }
 
 - (void)applyFilters {
+    // Remeber which font was selected before changing filters, so it can be re-selected (probably with a different index) afterwards.
+    NSString *selectedFontName;
+    NSInteger index = self.mainListView.selectedRow;
+    if (index != -1) {
+        selectedFontName = [[self.filteredFontFamilies objectAtIndex:index] copy];
+    }
+
     NSUInteger filterFlags = 0;
 
     if (self.chkItalic.state == NSOnState) {
@@ -205,8 +254,33 @@ const NSUInteger MIN_SIZE = 16;
         }
     }
 
-    [self.mainListView reloadData];
-    [self saveSettings];
+    [self updateUI];
+
+    index = [self listIndexFromFontName:selectedFontName];
+    if (index != -1) {
+        [self.mainListView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+        [self.mainListView scrollRowToVisible:index];
+    }
+}
+
+- (NSFont *)fontFromCurrentStateWithName:(NSString *)fontName {
+    NSFontManager *fm = [NSFontManager sharedFontManager];
+    NSFont *font = [NSFont fontWithName:fontName size:(CGFloat)fontSize];
+
+    if (self.chkItalic.state == NSOnState) {
+        font = [fm convertFont:font toHaveTrait:NSItalicFontMask];
+    }
+    if (self.chkBold.state == NSOnState) {
+        font = [fm convertFont:font toHaveTrait:NSBoldFontMask];
+    }
+
+    return font;
+}
+
+- (IBAction)takeFontNameFrom:(id)sender {
+    NSString *fontName = [filteredFontFamilies objectAtIndex:[sender clickedRow]];
+    [self updatePanelWithFontName:fontName];
+    [self.previewPanel makeKeyAndOrderFront:self];
 }
 
 - (IBAction)takeFilterFrom:(id)sender {
@@ -221,8 +295,7 @@ const NSUInteger MIN_SIZE = 16;
     }
     previewText = newText;
 
-    [self.mainListView reloadData];
-    [self saveSettings];
+    [self updateUI];
 }
 
 - (IBAction)takeFontSizeFrom:(id)sender {
@@ -236,16 +309,15 @@ const NSUInteger MIN_SIZE = 16;
 
     fontSize = newValue;
 
-    [self.mainListView reloadData];
-    [self saveSettings];
+    [self updateUI];
 }
 
 - (IBAction)takeColorFrom:(NSColorWell *)sender {
     if ([sender.identifier isEqualToString:@"BackgroundColor"]) {
         [self.mainListView setBackgroundColor:self.backgroundColorWell.color];
     }
-    [self.mainListView reloadData];
-    [self saveSettings];
+
+    [self updateUI];
 }
 
 - (IBAction)styleFilterWasChangedBy:(id)sender {
@@ -278,18 +350,8 @@ const NSUInteger MIN_SIZE = 16;
 
     } else {
         AFColoredTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-        NSFontManager *fm = [NSFontManager sharedFontManager];
-        NSFont *font = [NSFont fontWithName:fontName size:(CGFloat)fontSize];
-
-        if (self.chkItalic.state == NSOnState) {
-            font = [fm convertFont:font toHaveTrait:NSItalicFontMask];
-        }
-        if (self.chkBold.state == NSOnState) {
-            font = [fm convertFont:font toHaveTrait:NSBoldFontMask];
-        }
-
         result.textColor = self.textColorWell.color;
-        result.previewFont = font;
+        result.previewFont = [self fontFromCurrentStateWithName:fontName];
         result.text = previewText;
 
         return result;

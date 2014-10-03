@@ -15,6 +15,7 @@
 		1E2442A319DD708D00493263 /* RegExCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2442A219DD708D00493263 /* RegExCategories.m */; };
 		1E2FE4F119DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */; };
 		1E2FE4F419DB557E00D7F0D1 /* AFColoredTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */; };
+		1E4015AB19DF4F68001B1E4D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 1E4015AA19DF4F68001B1E4D /* README.md */; };
 		1EA80FF719DDA06F00654042 /* BKGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA80FF619DDA06F00654042 /* BKGradientView.m */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		1E2FE4F219DB557E00D7F0D1 /* AFColoredTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFColoredTableCellView.h; sourceTree = "<group>"; };
 		1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFColoredTableCellView.m; sourceTree = "<group>"; };
+		1E4015AA19DF4F68001B1E4D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1E78EFD019DEFC9300CDC9C9 /* FontList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FontList.entitlements; sourceTree = "<group>"; };
 		1EA80FF519DDA06F00654042 /* BKGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKGradientView.h; sourceTree = "<group>"; };
 		1EA80FF619DDA06F00654042 /* BKGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKGradientView.m; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		1E15284A19CF1CDF004B6372 = {
 			isa = PBXGroup;
 			children = (
+				1E4015AA19DF4F68001B1E4D /* README.md */,
 				1E15285519CF1CDF004B6372 /* FontList */,
 				1E15286919CF1CDF004B6372 /* FontListTests */,
 				1E15285419CF1CDF004B6372 /* Products */,
@@ -89,20 +92,20 @@
 		1E15285519CF1CDF004B6372 /* FontList */ = {
 			isa = PBXGroup;
 			children = (
+				1E15285A19CF1CDF004B6372 /* AppDelegate.h */,
+				1E15285B19CF1CDF004B6372 /* AppDelegate.m */,
+				1E15285F19CF1CDF004B6372 /* MainMenu.xib */,
 				1E78EFD019DEFC9300CDC9C9 /* FontList.entitlements */,
 				1E2442A119DD708D00493263 /* RegExCategories.h */,
 				1E2442A219DD708D00493263 /* RegExCategories.m */,
 				1E2FE4EF19DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.h */,
 				1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */,
-				1E15285A19CF1CDF004B6372 /* AppDelegate.h */,
-				1E15285B19CF1CDF004B6372 /* AppDelegate.m */,
-				1E15285D19CF1CDF004B6372 /* Images.xcassets */,
-				1E15285F19CF1CDF004B6372 /* MainMenu.xib */,
 				1EA80FF519DDA06F00654042 /* BKGradientView.h */,
 				1EA80FF619DDA06F00654042 /* BKGradientView.m */,
-				1E15285619CF1CDF004B6372 /* Supporting Files */,
 				1E2FE4F219DB557E00D7F0D1 /* AFColoredTableCellView.h */,
 				1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */,
+				1E15285D19CF1CDF004B6372 /* Images.xcassets */,
+				1E15285619CF1CDF004B6372 /* Supporting Files */,
 			);
 			path = FontList;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				1E2442A319DD708D00493263 /* RegExCategories.m in Sources */,
 				1E2FE4F119DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m in Sources */,
 				1E2FE4F419DB557E00D7F0D1 /* AFColoredTableCellView.m in Sources */,
+				1E4015AB19DF4F68001B1E4D /* README.md in Sources */,
 				1EA80FF719DDA06F00654042 /* BKGradientView.m in Sources */,
 				1E15285C19CF1CDF004B6372 /* AppDelegate.m in Sources */,
 				1E15285919CF1CDF004B6372 /* main.m in Sources */,
