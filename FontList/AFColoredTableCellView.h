@@ -10,10 +10,8 @@
 
 @interface AFColoredTableCellView : NSView
 
-@property (assign) NSColor *textColor;
-@property (assign) NSColor *backgroundFill;
-@property (assign) NSString *fontName;
-@property (assign) CGFloat fontSize;
-@property (assign) NSString *text;
+@property (weak) NSColor *textColor;
+@property NSFont *previewFont;
+@property NSString *text;
 
 @end

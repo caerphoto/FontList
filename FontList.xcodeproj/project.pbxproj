@@ -45,6 +45,7 @@
 		1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		1E2FE4F219DB557E00D7F0D1 /* AFColoredTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFColoredTableCellView.h; sourceTree = "<group>"; };
 		1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFColoredTableCellView.m; sourceTree = "<group>"; };
+		1E78EFD019DEFC9300CDC9C9 /* FontList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FontList.entitlements; sourceTree = "<group>"; };
 		1EA80FF519DDA06F00654042 /* BKGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKGradientView.h; sourceTree = "<group>"; };
 		1EA80FF619DDA06F00654042 /* BKGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKGradientView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +89,7 @@
 		1E15285519CF1CDF004B6372 /* FontList */ = {
 			isa = PBXGroup;
 			children = (
+				1E78EFD019DEFC9300CDC9C9 /* FontList.entitlements */,
 				1E2442A119DD708D00493263 /* RegExCategories.h */,
 				1E2442A219DD708D00493263 /* RegExCategories.m */,
 				1E2FE4EF19DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.h */,
@@ -180,6 +182,11 @@
 				TargetAttributes = {
 					1E15285219CF1CDF004B6372 = {
 						CreatedOnToolsVersion = 6.0.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					1E15286519CF1CDF004B6372 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -349,6 +356,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FontList/FontList.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FontList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -361,6 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FontList/FontList.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FontList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

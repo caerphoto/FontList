@@ -11,20 +11,16 @@
 @implementation AFColoredTableCellView
 
 - (void)drawRect:(NSRect)dirtyRect {
-    //[super drawRect:dirtyRect];
-
     NSRect bounds = [self bounds];
     NSPoint textOrigin = NSMakePoint(bounds.origin.x, bounds.origin.y);
 
     textOrigin.x += 5;
 
-    NSFont *font = [NSFont fontWithName:self.fontName size:self.fontSize];
-
     // NOTE: the descender is almost always negative
-    textOrigin.y = ((bounds.size.height - self.fontSize) / 2) + font.descender + 2;
+    textOrigin.y = ((bounds.size.height - self.previewFont.pointSize) / 2) + self.previewFont.descender + 2;
 
     NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                font, NSFontAttributeName,
+                                self.previewFont, NSFontAttributeName,
                                 self.textColor, NSForegroundColorAttributeName,
                                 nil];
 

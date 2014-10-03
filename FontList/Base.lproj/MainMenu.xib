@@ -14,6 +14,8 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
                 <outlet property="backgroundColorWell" destination="rfy-Te-1TT" id="pNO-FN-vbh"/>
+                <outlet property="chkBold" destination="LOn-e2-oIE" id="Qjg-qK-J9e"/>
+                <outlet property="chkItalic" destination="2g1-gZ-doc" id="8v7-wI-vbK"/>
                 <outlet property="filterField" destination="7O5-J6-y5c" id="aI3-H5-awq"/>
                 <outlet property="fontSizeField" destination="PYA-H2-xpK" id="YKD-mG-3av"/>
                 <outlet property="fontSizeStepper" destination="qTh-g5-gPe" id="dFp-Z0-doB"/>
@@ -37,8 +39,8 @@
                                     <action selector="orderFrontStandardAboutPanel:" target="-1" id="Exp-CZ-Vem"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                            <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                            <menuItem isSeparatorItem="YES" hidden="YES" id="VOq-y0-SEH"/>
+                            <menuItem title="Preferences…" hidden="YES" keyEquivalent="," id="BOF-NM-1cW"/>
                             <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                             <menuItem title="Services" id="NMo-om-nkz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -71,7 +73,7 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="File" id="dMs-cI-mzQ">
+                <menuItem title="File" hidden="YES" id="dMs-cI-mzQ">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
@@ -354,7 +356,7 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Format" id="jxT-CU-nIS">
+                <menuItem title="Format" hidden="YES" id="jxT-CU-nIS">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Format" id="GEO-Iw-cKr">
                         <items>
@@ -616,7 +618,7 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="View" id="H8h-7b-M4v">
+                <menuItem title="View" hidden="YES" id="H8h-7b-M4v">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" id="HyV-fh-RgO">
                         <items>
@@ -660,7 +662,7 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Help" id="wpr-3q-Mcd">
+                <menuItem title="Help" hidden="YES" id="wpr-3q-Mcd">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                         <items>
@@ -696,8 +698,8 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn identifier="NameColumn" editable="NO" width="168" minWidth="40" maxWidth="1000" id="SNG-mj-JeE">
-                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
+                                        <tableColumn identifier="NameColumn" editable="NO" width="232" minWidth="40" maxWidth="1000" id="SNG-mj-JeE">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="Name">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -710,13 +712,13 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView canDrawConcurrently="YES" id="O6V-M9-5PO">
-                                                    <rect key="frame" x="1" y="1" width="168" height="17"/>
+                                                    <rect key="frame" x="1" y="1" width="232" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ie6-V9-Okj">
-                                                            <rect key="frame" x="0.0" y="0.0" width="160" height="17"/>
-                                                            <textFieldCell key="cell" lineBreakMode="truncatingMiddle" enabled="NO" allowsUndo="NO" alignment="right" title="Table View Cell" usesSingleLineMode="YES" id="oGo-ll-njh" customClass="RSVerticallyCenteredTextFieldCell">
-                                                                <font key="font" metaFont="system"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="231" height="17"/>
+                                                            <textFieldCell key="cell" lineBreakMode="truncatingMiddle" enabled="NO" allowsUndo="NO" alignment="right" title="Table View Cell" id="oGo-ll-njh" customClass="RSVerticallyCenteredTextFieldCell">
+                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -724,7 +726,7 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="ie6-V9-Okj" firstAttribute="leading" secondItem="O6V-M9-5PO" secondAttribute="leading" constant="2" id="Hv1-hY-vJD"/>
-                                                        <constraint firstAttribute="trailing" secondItem="ie6-V9-Okj" secondAttribute="trailing" constant="10" id="MPu-Ht-g1f"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ie6-V9-Okj" secondAttribute="trailing" constant="3" id="MPu-Ht-g1f"/>
                                                         <constraint firstAttribute="bottom" secondItem="ie6-V9-Okj" secondAttribute="bottom" id="sbJ-oZ-gZm"/>
                                                         <constraint firstItem="ie6-V9-Okj" firstAttribute="top" secondItem="O6V-M9-5PO" secondAttribute="top" id="ztA-Go-Tdz"/>
                                                     </constraints>
@@ -789,10 +791,13 @@
                             </colorWell>
                             <button toolTip="Fonts with no bold weight will not be shown" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LOn-e2-oIE">
                                 <rect key="frame" x="18" y="41" width="50" height="18"/>
-                                <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="bNB-L3-4Zv">
+                                <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" inset="2" id="bNB-L3-4Zv">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="styleFilterWasChangedBy:" target="Voe-Tx-rLC" id="4Uq-dq-gj4"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4EI-AW-fOu">
                                 <rect key="frame" x="135" y="42" width="79" height="17"/>
@@ -804,10 +809,13 @@
                             </textField>
                             <button toolTip="Fonts with no italic style will not be shown" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2g1-gZ-doc">
                                 <rect key="frame" x="72" y="41" width="52" height="18"/>
-                                <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="NC7-uR-1aq">
+                                <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" inset="2" id="NC7-uR-1aq">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="styleFilterWasChangedBy:" target="Voe-Tx-rLC" id="kgQ-pY-g5h"/>
+                                </connections>
                             </button>
                             <textField identifier="FontSizeField" toolTip="Set preview font size" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYA-H2-xpK">
                                 <rect key="frame" x="89" y="8" width="46" height="22"/>
@@ -838,7 +846,7 @@
                                     <action selector="takeFontSizeFrom:" target="Voe-Tx-rLC" id="wY7-9t-HKH"/>
                                 </connections>
                             </stepper>
-                            <searchField toolTip="Search for fonts by name" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7O5-J6-y5c">
+                            <searchField toolTip="Search for fonts by name, optionally using a regular expression" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7O5-J6-y5c">
                                 <rect key="frame" x="455" y="39" width="173" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="2mk-z7-qFJ"/>

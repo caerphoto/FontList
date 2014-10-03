@@ -10,6 +10,8 @@
 #import "AFColoredTableCellView.h"
 #import "RegExCategories.h"
 
+const NSUInteger MIN_SIZE = 16;
+
 @interface AppDelegate ()
 
 @property (weak) IBOutlet NSWindow *window;
@@ -17,10 +19,73 @@
 
 @implementation AppDelegate
 
+@synthesize filterText;
 @synthesize previewText;
 @synthesize fontSize;
 @synthesize fontFamilies;
 @synthesize filteredFontFamilies;
+
+- (void)loadSettings {
+    // Load various saved settings (or use defaults)
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+
+    previewText = [settings stringForKey:@"previewText"];
+    if (previewText == nil) {
+        previewText = @"The quick brown fox jumps over the lazy dog";
+    } else {
+        self.previewTextField.stringValue = previewText;
+    }
+
+    filterText = [settings stringForKey:@"filterText"];
+    if (filterText == nil) {
+        filterText = @"";
+    } else {
+        self.filterField.stringValue = filterText;
+    }
+
+    fontSize = [settings integerForKey:@"fontSize"];
+    if (fontSize == 0) {
+        fontSize = [self.fontSizeField integerValue];
+    } else {
+        self.fontSizeField.integerValue = fontSize;
+        self.fontSizeStepper.integerValue = fontSize;
+    }
+
+    if ([settings boolForKey:@"bold"]) {
+        self.chkBold.state = NSOnState;
+    }
+    if ([settings boolForKey:@"italic"]) {
+        self.chkItalic.state = NSOnState;
+    }
+
+    NSData *colorData = [settings dataForKey:@"backgroundColor"];
+    if (colorData != nil) {
+        self.backgroundColorWell.color = (NSColor *)[NSUnarchiver unarchiveObjectWithData:colorData];
+    }
+
+    colorData = [settings dataForKey:@"textColor"];
+    if (colorData != nil) {
+        self.textColorWell.color = (NSColor *)[NSUnarchiver unarchiveObjectWithData:colorData];
+    }
+}
+
+- (void)saveSettings {
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    if (![self.filterField.stringValue isEqualToString:@""]) {
+        [settings setObject:self.filterField.stringValue forKey:@"filterText"];
+    }
+    if (![self.previewTextField.stringValue isEqualToString:@""]) {
+        [settings setObject:self.previewTextField.stringValue forKey:@"previewText"];
+    }
+    [settings setInteger:self.fontSizeStepper.integerValue forKey:@"fontSize"];
+    [settings setBool:(self.chkItalic.state == NSOnState) forKey:@"italic"];
+    [settings setBool:(self.chkBold.state == NSOnState) forKey:@"bold"];
+
+    NSData *colorData = [NSArchiver archivedDataWithRootObject:self.backgroundColorWell.color];
+    [settings setObject:colorData forKey:@"backgroundColor"];
+    colorData = [NSArchiver archivedDataWithRootObject:self.textColorWell.color];
+    [settings setObject:colorData forKey:@"textColor"];
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
@@ -32,8 +97,9 @@
 
     filteredFontFamilies = [fontFamilies mutableCopy];
 
-    previewText = @"The quick brown fox jumps over the lazy dog";
-    fontSize = [self.fontSizeField integerValue];
+    [self loadSettings];
+    [self applyFilters];
+
     [self.mainListView setBackgroundColor:self.backgroundColorWell.color];
 
     [self.mainListView setDelegate:(id)self];
@@ -45,22 +111,107 @@
     fontFamilies = nil;
 }
 
-- (IBAction)takeFilterFrom:(id)sender {
-    if ([[sender stringValue] isEqualToString:@""]) {
-        filteredFontFamilies = [fontFamilies mutableCopy];
+- (NSString *)styleStringFromFlags:(NSUInteger)flags {
+    NSString *result;
+
+    switch (flags) {
+        case 0:
+            result = @"";
+            break;
+        case 1:
+            result = @"\n✓ Italic";
+            break;
+        case 2:
+            result = @"\n✓ Bold";
+            break;
+        case 3:
+            result = @"\n✓ Bold, Italic";
+            break;
+        case 4:
+            result = @"\n✓ BoldItalic";
+            break;
+        case 5:
+            result = @"\n✓ Italic, BoldItalic";
+            break;
+        case 6:
+            result = @"\n✓ Bold, BoldItalic";
+            break;
+        case 7:
+            result = @"\n✓ Bold, Italic, BoldItalic";
+            break;
+        default:
+            result = @" ?";
+    }
+
+    return result;
+}
+
+- (NSUInteger)styleFlagsForFontName:(NSString *)fontName {
+    NSUInteger styleFlags = 0;
+    NSFontManager *fm = [NSFontManager sharedFontManager];
+    NSArray *styles = [fm availableMembersOfFontFamily:fontName];
+
+    for (NSArray *style in styles) {
+        if ([style[1] isEqualToString:@"Italic"]) {
+            styleFlags |= 1;
+            continue;
+        }
+        if ([style[1] isEqualToString:@"Bold"]) {
+            styleFlags |= 2;
+            continue;
+        }
+        if ([style[1] isEqualToString:@"Bold Italic"]) {
+            styleFlags|= 4;
+        }
+    }
+
+    return styleFlags;
+}
+
+- (void)applyFilters {
+    NSUInteger filterFlags = 0;
+
+    if (self.chkItalic.state == NSOnState) {
+        filterFlags |= 1;
+    }
+    if (self.chkBold.state == NSOnState) {
+        filterFlags |= 2;
+    }
+
+    // A font with Bold and Italic is not the same as one with Bold Italic.
+    if (filterFlags == 3) {
+        filterFlags = 4;
+    }
+
+    if ([filterText isEqualToString:@""]) {
+        [filteredFontFamilies removeAllObjects];
+        for (id fontName in fontFamilies) {
+            NSUInteger styleFlags = [self styleFlagsForFontName:fontName];
+            if (filterFlags == 0 || (styleFlags & filterFlags) != 0) {
+                [filteredFontFamilies addObject:fontName];
+            }
+        }
     } else {
-        NSString *regexString = [NSString stringWithFormat:@"%@", [sender stringValue]];
-        Rx *regex = [regexString toRxIgnoreCase:YES];
+        Rx *regex = [filterText toRxIgnoreCase:YES];
 
         [filteredFontFamilies removeAllObjects];
-        for (id font in fontFamilies) {
-            if ([font isMatch:regex]) {
-                [filteredFontFamilies addObject:font];
+        for (id fontName in fontFamilies) {
+            NSUInteger styleFlags = [self styleFlagsForFontName:fontName];
+            if ([fontName isMatch:regex]) {
+                if (filterFlags == 0 || (styleFlags & filterFlags) != 0) {
+                    [filteredFontFamilies addObject:fontName];
+                }
             }
         }
     }
 
     [self.mainListView reloadData];
+    [self saveSettings];
+}
+
+- (IBAction)takeFilterFrom:(id)sender {
+    filterText = [sender stringValue];
+    [self applyFilters];
 }
 
 - (IBAction)takePreviewTextFrom:(id)sender {
@@ -71,6 +222,7 @@
     previewText = newText;
 
     [self.mainListView reloadData];
+    [self saveSettings];
 }
 
 - (IBAction)takeFontSizeFrom:(id)sender {
@@ -83,7 +235,9 @@
     }
 
     fontSize = newValue;
+
     [self.mainListView reloadData];
+    [self saveSettings];
 }
 
 - (IBAction)takeColorFrom:(NSColorWell *)sender {
@@ -91,6 +245,11 @@
         [self.mainListView setBackgroundColor:self.backgroundColorWell.color];
     }
     [self.mainListView reloadData];
+    [self saveSettings];
+}
+
+- (IBAction)styleFilterWasChangedBy:(id)sender {
+    [self applyFilters];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)mainFontList {
@@ -100,7 +259,11 @@
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    return fontSize * 1.8;
+    if (fontSize > MIN_SIZE) {
+        return fontSize * 1.8;
+    } else {
+        return MIN_SIZE * 1.8;
+    }
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
@@ -109,14 +272,24 @@
 
     if ([tableColumn.identifier isEqualToString:@"NameColumn"]) {
         NSTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-        result.textField.stringValue = fontName;
+        NSUInteger styleFlags = [self styleFlagsForFontName:fontName];
+        result.textField.stringValue = [fontName stringByAppendingString:[self styleStringFromFlags:styleFlags]];
         return result;
 
     } else {
         AFColoredTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+        NSFontManager *fm = [NSFontManager sharedFontManager];
+        NSFont *font = [NSFont fontWithName:fontName size:(CGFloat)fontSize];
+
+        if (self.chkItalic.state == NSOnState) {
+            font = [fm convertFont:font toHaveTrait:NSItalicFontMask];
+        }
+        if (self.chkBold.state == NSOnState) {
+            font = [fm convertFont:font toHaveTrait:NSBoldFontMask];
+        }
+
         result.textColor = self.textColorWell.color;
-        result.fontName = fontName;
-        result.fontSize = (CGFloat)fontSize;
+        result.previewFont = font;
         result.text = previewText;
 
         return result;
