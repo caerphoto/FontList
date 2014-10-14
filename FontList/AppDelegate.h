@@ -23,6 +23,7 @@
 
 @property (weak) IBOutlet NSPanel *previewPanel;
 @property (unsafe_unretained) IBOutlet NSTextView *detailedPreviewEditor;
+@property (weak) IBOutlet NSButton *chkSyncPreview;
 
 @property (copy) NSString *filterText;
 @property (copy) NSString *previewText;
@@ -36,10 +37,13 @@
 - (IBAction)takeColorFrom:(NSColorWell *)sender;
 - (IBAction)styleFilterWasChangedBy:(id)sender;
 - (IBAction)takeFontNameFrom:(id)sender;
+- (IBAction)synchronizePreview:(id)sender;
+- (IBAction)reloadFonts:(id)sender;
 
 - (void)loadSettings;
 - (void)saveSettings;
 - (void)applyFilters;
+- (void)fetchFontFamilies;
 - (NSInteger)listIndexFromFontName:(NSString *)fontName;
 - (void)updatePanelWithFontName:(NSString *)fontName;
 - (void)updateUI;

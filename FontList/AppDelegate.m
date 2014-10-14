@@ -109,35 +109,46 @@ const NSUInteger MIN_SIZE = 16;
 
 - (void)updatePanelWithFontName:(NSString *)fontName {
     NSFont *font;
+    BOOL familyOnly = (self.chkSyncPreview.state == NSOffState);
 
     if (fontName == nil) {
-        font = [self fontFromCurrentStateWithName:self.detailedPreviewEditor.font.familyName];
+        fontName = self.detailedPreviewEditor.font.familyName;
+    }
+
+    if (familyOnly) {
+        font = [[NSFontManager sharedFontManager] convertFont:self.detailedPreviewEditor.font toFamily:fontName];
     } else {
         font = [self fontFromCurrentStateWithName:fontName];
     }
 
     self.detailedPreviewEditor.font = font;
-    self.detailedPreviewEditor.textColor = self.textColorWell.color;
-    self.detailedPreviewEditor.backgroundColor = self.backgroundColorWell.color;
-    self.previewPanel.title = font.familyName;
+    self.previewPanel.title = fontName;
+
+    if (!familyOnly) {
+        self.detailedPreviewEditor.textColor = self.textColorWell.color;
+        self.detailedPreviewEditor.backgroundColor = self.backgroundColorWell.color;
+    }
 }
 
 - (void)updateUI {
-    [self updatePanelWithFontName:nil];
+    if (self.chkSyncPreview.state == NSOnState) {
+        [self updatePanelWithFontName:nil];
+    }
     [self.mainListView reloadData];
 
     [self saveSettings];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void)fetchFontFamilies {
     NSFontManager *manager = [NSFontManager sharedFontManager];
     NSArray *unsortedSysFonts = [manager availableFontFamilies];
 
     fontFamilies = [unsortedSysFonts sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-    unsortedSysFonts = nil;
-
     filteredFontFamilies = [fontFamilies mutableCopy];
+}
 
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [self fetchFontFamilies];
     [self loadSettings];
     [self applyFilters];
 
@@ -278,9 +289,21 @@ const NSUInteger MIN_SIZE = 16;
 }
 
 - (IBAction)takeFontNameFrom:(id)sender {
-    NSString *fontName = [filteredFontFamilies objectAtIndex:[sender clickedRow]];
-    [self updatePanelWithFontName:fontName];
+    NSString *newFontName = [filteredFontFamilies objectAtIndex:[sender clickedRow]];
+    [self updatePanelWithFontName:newFontName];
     [self.previewPanel makeKeyAndOrderFront:self];
+}
+
+- (IBAction)synchronizePreview:(id)sender {
+    if ([(NSButton *)sender state] == NSOnState) {
+        NSString *fontName = [filteredFontFamilies objectAtIndex:[self.mainListView selectedRow]];
+        [self updatePanelWithFontName:fontName];
+    }
+}
+
+- (IBAction)reloadFonts:(id)sender {
+    [self fetchFontFamilies];
+    [self updateUI];
 }
 
 - (IBAction)takeFilterFrom:(id)sender {

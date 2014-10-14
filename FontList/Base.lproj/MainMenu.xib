@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
@@ -16,6 +16,7 @@
                 <outlet property="backgroundColorWell" destination="rfy-Te-1TT" id="pNO-FN-vbh"/>
                 <outlet property="chkBold" destination="LOn-e2-oIE" id="Qjg-qK-J9e"/>
                 <outlet property="chkItalic" destination="2g1-gZ-doc" id="8v7-wI-vbK"/>
+                <outlet property="chkSyncPreview" destination="Nel-o1-aOn" id="o7l-Ho-vft"/>
                 <outlet property="detailedPreviewEditor" destination="noX-oh-bob" id="m1S-cU-Prb"/>
                 <outlet property="filterField" destination="7O5-J6-y5c" id="aI3-H5-awq"/>
                 <outlet property="fontSizeField" destination="PYA-H2-xpK" id="YKD-mG-3av"/>
@@ -621,20 +622,13 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="View" hidden="YES" id="H8h-7b-M4v">
+                <menuItem title="View" id="H8h-7b-M4v">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Reload Fonts" keyEquivalent="r" id="NUt-yC-MSg">
                                 <connections>
-                                    <action selector="toggleToolbarShown:" target="-1" id="BXY-wc-z0C"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Customize Toolbar…" id="1UK-8n-QPP">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="pQI-g3-MTW"/>
+                                    <action selector="reloadFonts:" target="Voe-Tx-rLC" id="e5z-ig-jT0"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -779,12 +773,8 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="dhq-1r-lbo">
                         <rect key="frame" x="0.0" y="452" width="648" height="78"/>
                         <subviews>
-                            <colorWell identifier="TextColor" translatesAutoresizingMaskIntoConstraints="NO" id="uAR-uZ-wHK">
+                            <colorWell identifier="TextColor" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uAR-uZ-wHK">
                                 <rect key="frame" x="220" y="39" width="44" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="4bx-f7-d8C"/>
-                                    <constraint firstAttribute="height" constant="23" id="dE1-JO-jcR"/>
-                                </constraints>
                                 <color key="color" red="0.16680676284615381" green="0.20923297746359548" blue="0.3296055947580645" alpha="1" colorSpace="deviceRGB"/>
                                 <accessibility description="Select a colour for the preview text"/>
                                 <connections>
@@ -905,12 +895,10 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="du1-xn-zVc" secondAttribute="trailing" constant="22" id="406-ku-dwr"/>
+                            <constraint firstItem="du1-xn-zVc" firstAttribute="top" secondItem="dhq-1r-lbo" secondAttribute="top" constant="48" id="8Z7-CK-Nzk"/>
+                            <constraint firstItem="7O5-J6-y5c" firstAttribute="top" secondItem="dhq-1r-lbo" secondAttribute="top" constant="17" id="9Qx-3V-83R"/>
                             <constraint firstAttribute="trailing" secondItem="7O5-J6-y5c" secondAttribute="trailing" constant="20" id="HyB-nV-IoZ"/>
-                            <constraint firstItem="uAR-uZ-wHK" firstAttribute="top" secondItem="dhq-1r-lbo" secondAttribute="top" constant="16" id="Mhb-RB-6Fg"/>
-                            <constraint firstItem="7O5-J6-y5c" firstAttribute="top" secondItem="dhq-1r-lbo" secondAttribute="top" constant="17" id="Rb7-Ur-3Jl"/>
                             <constraint firstItem="du1-xn-zVc" firstAttribute="leading" secondItem="dhq-1r-lbo" secondAttribute="leading" constant="261" id="UJt-76-Kdr"/>
-                            <constraint firstItem="uAR-uZ-wHK" firstAttribute="leading" secondItem="dhq-1r-lbo" secondAttribute="leading" constant="220" id="b0B-2d-fQd"/>
-                            <constraint firstItem="du1-xn-zVc" firstAttribute="top" secondItem="dhq-1r-lbo" secondAttribute="top" constant="48" id="xCL-bP-cX3"/>
                             <constraint firstAttribute="height" constant="78" id="yT9-ug-lO4"/>
                         </constraints>
                     </customView>
@@ -928,6 +916,20 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button toolTip="Reload fonts" wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kTD-p9-qZH">
+                                <rect key="frame" x="6" y="-5" width="15" height="32"/>
+                                <shadow key="shadow" blurRadius="1">
+                                    <size key="offset" width="0.0" height="1"/>
+                                    <color key="color" white="0.0" alpha="0.48999999999999999" colorSpace="calibratedWhite"/>
+                                </shadow>
+                                <buttonCell key="cell" type="bevel" title="↻" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="xBj-AG-WTA">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="reloadFonts:" target="Voe-Tx-rLC" id="GDw-H9-FKU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="kKk-i0-q8I" firstAttribute="leading" secondItem="uYg-TV-umk" secondAttribute="leading" id="6Ac-98-M8z"/>
@@ -954,7 +956,7 @@
         </window>
         <userDefaultsController representsSharedInstance="YES" id="cGL-PJ-K6M"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="FontListPreviewPanel" animationBehavior="default" id="6v0-4b-3Ct" customClass="NSPanel">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" texturedBackground="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES" texturedBackground="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="272" y="172" width="444" height="378"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
@@ -963,16 +965,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ki9-Ax-yjM">
-                        <rect key="frame" x="4" y="4" width="436" height="374"/>
+                        <rect key="frame" x="4" y="4" width="436" height="346"/>
                         <clipView key="contentView" id="tu5-p9-aRJ">
                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" findStyle="panel" allowsDocumentBackgroundColorChange="YES" allowsUndo="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="noX-oh-bob">
-                                    <rect key="frame" x="0.0" y="0.0" width="223" height="368"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="223" height="372"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="419" height="372"/>
+                                    <size key="minSize" width="419" height="344"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <attributedString key="textStorage">
                                         <fragment>
@@ -986,8 +988,9 @@
                                         </fragment>
                                     </attributedString>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="419" height="372"/>
+                                    <size key="minSize" width="419" height="344"/>
                                     <size key="maxSize" width="463" height="10000000"/>
+                                    <accessibility description="An editable preview using the specified font and colours."/>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1001,10 +1004,20 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <button toolTip="Double-clicking a font will still update this window to use that font" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Nel-o1-aOn">
+                        <rect key="frame" x="2" y="356" width="262" height="18"/>
+                        <buttonCell key="cell" type="check" title="Synchronise appearance with main list" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" state="on" inset="2" id="Sng-9Y-a1S">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="synchronizePreview:" target="Voe-Tx-rLC" id="lVH-KQ-piS"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="ki9-Ax-yjM" secondAttribute="bottom" constant="4" id="5OW-Rt-lOI"/>
-                    <constraint firstItem="ki9-Ax-yjM" firstAttribute="top" secondItem="UPk-g2-C7A" secondAttribute="top" id="AZG-Wd-W9p"/>
+                    <constraint firstItem="ki9-Ax-yjM" firstAttribute="top" secondItem="UPk-g2-C7A" secondAttribute="top" constant="28" id="AZG-Wd-W9p"/>
                     <constraint firstAttribute="trailing" secondItem="ki9-Ax-yjM" secondAttribute="trailing" constant="4" id="Hah-Si-ta7"/>
                     <constraint firstItem="ki9-Ax-yjM" firstAttribute="leading" secondItem="UPk-g2-C7A" secondAttribute="leading" constant="4" id="m5S-ct-p0a"/>
                 </constraints>
