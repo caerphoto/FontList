@@ -303,6 +303,7 @@ const NSUInteger MIN_SIZE = 16;
 
 - (IBAction)reloadFonts:(id)sender {
     [self fetchFontFamilies];
+    [self applyFilters];
     [self updateUI];
 }
 
@@ -375,7 +376,7 @@ const NSUInteger MIN_SIZE = 16;
         AFColoredTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
         result.textColor = self.textColorWell.color;
         result.previewFont = [self fontFromCurrentStateWithName:fontName];
-        result.text = previewText;
+        result.previewText = previewText;
 
         return result;
     }

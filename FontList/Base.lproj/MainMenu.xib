@@ -1004,7 +1004,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button toolTip="Double-clicking a font will still update this window to use that font" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Nel-o1-aOn">
+                    <button toolTip="Even if unchecked, double-clicking a font will still update this window to use that font" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Nel-o1-aOn">
                         <rect key="frame" x="2" y="356" width="262" height="18"/>
                         <buttonCell key="cell" type="check" title="Synchronise appearance with main list" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" state="on" inset="2" id="Sng-9Y-a1S">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

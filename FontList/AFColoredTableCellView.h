@@ -12,6 +12,11 @@
 
 @property (weak) NSColor *textColor;
 @property NSFont *previewFont;
-@property NSString *text;
+@property NSString *previewText;
+
+- (NSString *)previewText;
+- (void)setPreviewText:(NSString *)theText;
+- (NSFont *)previewFont;
+- (void)setPreviewFont:(NSFont *)theFont;
 
 @end
