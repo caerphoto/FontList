@@ -18,9 +18,8 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
-        [self setStartingColor:[NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0]];
-        [self setEndingColor:[NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0.2]];
+        [self setStartingColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5]];
+        [self setEndingColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.0]];
         [self setAngle:270];
     }
     return self;
