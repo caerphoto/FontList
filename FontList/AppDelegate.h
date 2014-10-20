@@ -25,6 +25,9 @@
 @property (unsafe_unretained) IBOutlet NSTextView *detailedPreviewEditor;
 @property (weak) IBOutlet NSButton *chkSyncPreview;
 
+@property (weak) IBOutlet NSPanel *aboutWindow;
+@property (weak) IBOutlet NSImageView *aboutIcon;
+
 @property (copy) NSString *filterText;
 @property (copy) NSString *previewText;
 @property (copy) NSArray *fontFamilies;
@@ -39,6 +42,8 @@
 - (IBAction)takeFontNameFrom:(id)sender;
 - (IBAction)synchronizePreview:(id)sender;
 - (IBAction)reloadFonts:(id)sender;
+
+- (IBAction)showAboutWindow:(id)sender;
 
 - (void)loadSettings;
 - (void)saveSettings;

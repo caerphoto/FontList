@@ -31,7 +31,7 @@ const NSUInteger MIN_SIZE = 16;
 
     previewText = [settings stringForKey:@"previewText"];
     if (previewText == nil) {
-        previewText = @"The quick brown fox jumps over the lazy dog";
+        previewText = [[self.previewTextField cell] placeholderString];
     } else {
         self.previewTextField.stringValue = previewText;
     }
@@ -153,6 +153,8 @@ const NSUInteger MIN_SIZE = 16;
     [self applyFilters];
 
     [self.mainListView setBackgroundColor:self.backgroundColorWell.color];
+
+    [self.aboutIcon setImage:[NSApp applicationIconImage]];
 
     [self.mainListView setDelegate:(id)self];
     [self.mainListView setDataSource:(id)self];
@@ -305,6 +307,10 @@ const NSUInteger MIN_SIZE = 16;
     [self fetchFontFamilies];
     [self applyFilters];
     [self updateUI];
+}
+
+- (IBAction)showAboutWindow:(id)sender {
+    [self.aboutWindow makeKeyAndOrderFront:self];
 }
 
 - (IBAction)takeFilterFrom:(id)sender {

@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Explorem Ipsum.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>FontList.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>1E15286519CF1CDF004B6372</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1E4A1D5F19F52A43002B8EB7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1E4A1D7119F52A44002B8EB7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
