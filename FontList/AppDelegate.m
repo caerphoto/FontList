@@ -9,8 +9,10 @@
 #import "AppDelegate.h"
 #import "AFColoredTableCellView.h"
 #import "RegExCategories.h"
+#import "PopupController.h"
 
 const NSUInteger MIN_SIZE = 16;
+NSUInteger taskCounter = 0;
 
 @interface AppDelegate ()
 
@@ -24,6 +26,7 @@ const NSUInteger MIN_SIZE = 16;
 @synthesize fontSize;
 @synthesize fontFamilies;
 @synthesize filteredFontFamilies;
+@synthesize lstPreviewWindows;
 
 - (void)loadSettings {
     // Load various saved settings (or use defaults)
@@ -107,34 +110,18 @@ const NSUInteger MIN_SIZE = 16;
 }
 
 
-- (void)updatePanelWithFontName:(NSString *)fontName {
-    NSFont *font;
-    BOOL familyOnly = (self.chkSyncPreview.state == NSOffState);
-
-    if (fontName == nil) {
-        fontName = self.detailedPreviewEditor.font.familyName;
-    }
-
-    if (familyOnly) {
-        font = [[NSFontManager sharedFontManager] convertFont:self.detailedPreviewEditor.font toFamily:fontName];
-    } else {
-        font = [self fontFromCurrentStateWithName:fontName];
-    }
-
-    self.detailedPreviewEditor.font = font;
-    self.previewPanel.title = fontName;
-
-    if (!familyOnly) {
-        self.detailedPreviewEditor.textColor = self.textColorWell.color;
-        self.detailedPreviewEditor.backgroundColor = self.backgroundColorWell.color;
-    }
-}
 
 - (void)updateUI {
-    if (self.chkSyncPreview.state == NSOnState) {
-        [self updatePanelWithFontName:nil];
-    }
-    [self.mainListView reloadData];
+    taskCounter += 1;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (taskCounter > 1) {
+            taskCounter -= 1;
+            return;
+        } else {
+            [self.mainListView reloadData];
+            taskCounter -= 1;
+        }
+    });
 
     [self saveSettings];
 }
@@ -156,9 +143,11 @@ const NSUInteger MIN_SIZE = 16;
 
     [self.aboutIcon setImage:[NSApp applicationIconImage]];
 
+    self.lstPreviewWindows = [[NSMutableArray alloc] init];
+
     [self.mainListView setDelegate:(id)self];
     [self.mainListView setDataSource:(id)self];
-    [self.mainListView setDoubleAction:@selector(takeFontNameFrom:)];
+    [self.mainListView setDoubleAction:@selector(showPopupPreviewFor:)];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -216,7 +205,7 @@ const NSUInteger MIN_SIZE = 16;
             continue;
         }
         if ([style[1] isEqualToString:@"Bold Italic"]) {
-            styleFlags|= 4;
+            styleFlags |= 4;
         }
     }
 
@@ -290,23 +279,24 @@ const NSUInteger MIN_SIZE = 16;
     return font;
 }
 
-- (IBAction)takeFontNameFrom:(id)sender {
-    NSString *newFontName = [filteredFontFamilies objectAtIndex:[sender clickedRow]];
-    [self updatePanelWithFontName:newFontName];
-    [self.previewPanel makeKeyAndOrderFront:self];
-}
+- (IBAction)showPopupPreviewFor:(id)sender {
+    NSString *familyName = [filteredFontFamilies objectAtIndex:[sender clickedRow]];
+    PopupController *newPopup = [[PopupController alloc] initWithWindowNibName:@"PopupPreview"];
+    [lstPreviewWindows addObject:newPopup];
 
-- (IBAction)synchronizePreview:(id)sender {
-    if ([(NSButton *)sender state] == NSOnState) {
-        NSString *fontName = [filteredFontFamilies objectAtIndex:[self.mainListView selectedRow]];
-        [self updatePanelWithFontName:fontName];
-    }
+    [newPopup showWindow:self];
+
+    newPopup.font = [self fontFromCurrentStateWithName:familyName];
+    newPopup.textColor = self.textColorWell.color;
+    newPopup.backgroundColor = self.backgroundColorWell.color;
+    newPopup.listIndex = lstPreviewWindows.count - 1;
+    newPopup.windowList = lstPreviewWindows;
+
 }
 
 - (IBAction)reloadFonts:(id)sender {
     [self fetchFontFamilies];
     [self applyFilters];
-    [self updateUI];
 }
 
 - (IBAction)showAboutWindow:(id)sender {
@@ -345,9 +335,9 @@ const NSUInteger MIN_SIZE = 16;
 - (IBAction)takeColorFrom:(NSColorWell *)sender {
     if ([sender.identifier isEqualToString:@"BackgroundColor"]) {
         [self.mainListView setBackgroundColor:self.backgroundColorWell.color];
+    } else {
+        [self updateUI];
     }
-
-    [self updateUI];
 }
 
 - (IBAction)styleFilterWasChangedBy:(id)sender {
@@ -380,7 +370,7 @@ const NSUInteger MIN_SIZE = 16;
 
     } else {
         AFColoredTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-        result.textColor = self.textColorWell.color;
+        result.textColor = self.textColorWell.color.CGColor;
         result.previewFont = [self fontFromCurrentStateWithName:fontName];
         result.previewText = previewText;
 

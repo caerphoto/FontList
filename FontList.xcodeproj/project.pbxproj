@@ -14,11 +14,13 @@
 		1E2442A319DD708D00493263 /* RegExCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2442A219DD708D00493263 /* RegExCategories.m */; };
 		1E2FE4F119DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE4F019DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m */; };
 		1E2FE4F419DB557E00D7F0D1 /* AFColoredTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */; };
-		1EA80FF719DDA06F00654042 /* BKGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA80FF619DDA06F00654042 /* BKGradientView.m */; };
+		1E4A1D8219F5864B002B8EB7 /* PopupPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E4A1D8119F5864B002B8EB7 /* PopupPreview.xib */; };
+		1E4A1D8619F64BFD002B8EB7 /* PopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A1D8419F64BFD002B8EB7 /* PopupController.m */; };
+		1E8FB81219F7CF7D00770BCC /* AFInsetTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8FB81119F7CF7D00770BCC /* AFInsetTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1E15285319CF1CDF004B6372 /* FontList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FontList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E15285319CF1CDF004B6372 /* Explorem Ipsum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Explorem Ipsum.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E15285719CF1CDF004B6372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E15285819CF1CDF004B6372 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1E15285A19CF1CDF004B6372 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -34,21 +36,18 @@
 		1E2FE4F219DB557E00D7F0D1 /* AFColoredTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFColoredTableCellView.h; sourceTree = "<group>"; };
 		1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFColoredTableCellView.m; sourceTree = "<group>"; };
 		1E4015AA19DF4F68001B1E4D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		1E4A1D7219F52A44002B8EB7 /* Explorem IpsumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Explorem IpsumTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E4A1D8119F5864B002B8EB7 /* PopupPreview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupPreview.xib; sourceTree = "<group>"; };
+		1E4A1D8319F64BFD002B8EB7 /* PopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupController.h; sourceTree = "<group>"; };
+		1E4A1D8419F64BFD002B8EB7 /* PopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupController.m; sourceTree = "<group>"; };
 		1E78EFD019DEFC9300CDC9C9 /* FontList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FontList.entitlements; sourceTree = "<group>"; };
+		1E8FB81019F7CF7D00770BCC /* AFInsetTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFInsetTextView.h; sourceTree = "<group>"; };
+		1E8FB81119F7CF7D00770BCC /* AFInsetTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFInsetTextView.m; sourceTree = "<group>"; };
 		1EA80FF519DDA06F00654042 /* BKGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKGradientView.h; sourceTree = "<group>"; };
 		1EA80FF619DDA06F00654042 /* BKGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKGradientView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1E15285019CF1CDF004B6372 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1E4A1D6F19F52A44002B8EB7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -71,8 +70,7 @@
 		1E15285419CF1CDF004B6372 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1E15285319CF1CDF004B6372 /* FontList.app */,
-				1E4A1D7219F52A44002B8EB7 /* Explorem IpsumTests.xctest */,
+				1E15285319CF1CDF004B6372 /* Explorem Ipsum.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +92,11 @@
 				1E2FE4F319DB557E00D7F0D1 /* AFColoredTableCellView.m */,
 				1E15285D19CF1CDF004B6372 /* Images.xcassets */,
 				1E15285619CF1CDF004B6372 /* Supporting Files */,
+				1E4A1D8119F5864B002B8EB7 /* PopupPreview.xib */,
+				1E4A1D8319F64BFD002B8EB7 /* PopupController.h */,
+				1E4A1D8419F64BFD002B8EB7 /* PopupController.m */,
+				1E8FB81019F7CF7D00770BCC /* AFInsetTextView.h */,
+				1E8FB81119F7CF7D00770BCC /* AFInsetTextView.m */,
 			);
 			path = FontList;
 			sourceTree = "<group>";
@@ -110,6 +113,7 @@
 		1E15286919CF1CDF004B6372 /* FontListTests */ = {
 			isa = PBXGroup;
 			children = (
+				1E15286B19CF1CDF004B6372 /* Info.plist */,
 				1E15286C19CF1CDF004B6372 /* FontListTests.m */,
 				1E15286A19CF1CDF004B6372 /* Supporting Files */,
 			);
@@ -119,7 +123,6 @@
 		1E15286A19CF1CDF004B6372 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1E15286B19CF1CDF004B6372 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -141,25 +144,8 @@
 			);
 			name = "Explorem Ipsum";
 			productName = FontList;
-			productReference = 1E15285319CF1CDF004B6372 /* FontList.app */;
+			productReference = 1E15285319CF1CDF004B6372 /* Explorem Ipsum.app */;
 			productType = "com.apple.product-type.application";
-		};
-		1E4A1D7119F52A44002B8EB7 /* Explorem IpsumTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1E4A1D7D19F52A44002B8EB7 /* Build configuration list for PBXNativeTarget "Explorem IpsumTests" */;
-			buildPhases = (
-				1E4A1D6E19F52A44002B8EB7 /* Sources */,
-				1E4A1D6F19F52A44002B8EB7 /* Frameworks */,
-				1E4A1D7019F52A44002B8EB7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Explorem IpsumTests";
-			productName = "Explorem IpsumTests";
-			productReference = 1E4A1D7219F52A44002B8EB7 /* Explorem IpsumTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -178,10 +164,6 @@
 							};
 						};
 					};
-					1E4A1D7119F52A44002B8EB7 = {
-						CreatedOnToolsVersion = 6.0.1;
-						TestTargetID = 1E4A1D5F19F52A43002B8EB7;
-					};
 				};
 			};
 			buildConfigurationList = 1E15284E19CF1CDF004B6372 /* Build configuration list for PBXProject "FontList" */;
@@ -198,7 +180,6 @@
 			projectRoot = "";
 			targets = (
 				1E15285219CF1CDF004B6372 /* Explorem Ipsum */,
-				1E4A1D7119F52A44002B8EB7 /* Explorem IpsumTests */,
 			);
 		};
 /* End PBXProject section */
@@ -209,14 +190,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E15285E19CF1CDF004B6372 /* Images.xcassets in Resources */,
+				1E4A1D8219F5864B002B8EB7 /* PopupPreview.xib in Resources */,
 				1E15286119CF1CDF004B6372 /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1E4A1D7019F52A44002B8EB7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,16 +205,10 @@
 				1E2442A319DD708D00493263 /* RegExCategories.m in Sources */,
 				1E2FE4F119DB468000D7F0D1 /* RSVerticallyCenteredTextFieldCell.m in Sources */,
 				1E2FE4F419DB557E00D7F0D1 /* AFColoredTableCellView.m in Sources */,
-				1EA80FF719DDA06F00654042 /* BKGradientView.m in Sources */,
 				1E15285C19CF1CDF004B6372 /* AppDelegate.m in Sources */,
 				1E15285919CF1CDF004B6372 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1E4A1D6E19F52A44002B8EB7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				1E8FB81219F7CF7D00770BCC /* AFInsetTextView.m in Sources */,
+				1E4A1D8619F64BFD002B8EB7 /* PopupController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,42 +328,6 @@
 			};
 			name = Release;
 		};
-		1E4A1D7E19F52A44002B8EB7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Explorem IpsumTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Explorem Ipsum.app/Contents/MacOS/Explorem Ipsum";
-			};
-			name = Debug;
-		};
-		1E4A1D7F19F52A44002B8EB7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Explorem IpsumTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Explorem Ipsum.app/Contents/MacOS/Explorem Ipsum";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -415,14 +348,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		1E4A1D7D19F52A44002B8EB7 /* Build configuration list for PBXNativeTarget "Explorem IpsumTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1E4A1D7E19F52A44002B8EB7 /* Debug */,
-				1E4A1D7F19F52A44002B8EB7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

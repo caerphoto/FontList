@@ -7,13 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AFColoredTableCellView.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 @property (weak) IBOutlet NSTableView *mainListView;
 @property (weak) IBOutlet NSTextField *previewTextField;
 @property (weak) IBOutlet NSTextField *fontSizeField;
 @property (weak) IBOutlet NSStepper *fontSizeStepper;
-@property (weak) IBOutlet NSTableCellView *listCell;
 @property (weak) IBOutlet NSColorWell *textColorWell;
 @property (weak) IBOutlet NSColorWell *backgroundColorWell;
 @property (weak) IBOutlet NSTextField *filterField;
@@ -21,9 +21,7 @@
 @property (weak) IBOutlet NSButton *chkBold;
 @property (weak) IBOutlet NSTextField *statusBar;
 
-@property (weak) IBOutlet NSPanel *previewPanel;
-@property (unsafe_unretained) IBOutlet NSTextView *detailedPreviewEditor;
-@property (weak) IBOutlet NSButton *chkSyncPreview;
+@property (strong) NSMutableArray *lstPreviewWindows;
 
 @property (weak) IBOutlet NSPanel *aboutWindow;
 @property (weak) IBOutlet NSImageView *aboutIcon;
@@ -39,8 +37,7 @@
 - (IBAction)takeFontSizeFrom:(id)sender;
 - (IBAction)takeColorFrom:(NSColorWell *)sender;
 - (IBAction)styleFilterWasChangedBy:(id)sender;
-- (IBAction)takeFontNameFrom:(id)sender;
-- (IBAction)synchronizePreview:(id)sender;
+- (IBAction)showPopupPreviewFor:(id)sender;
 - (IBAction)reloadFonts:(id)sender;
 
 - (IBAction)showAboutWindow:(id)sender;
@@ -50,7 +47,6 @@
 - (void)applyFilters;
 - (void)fetchFontFamilies;
 - (NSInteger)listIndexFromFontName:(NSString *)fontName;
-- (void)updatePanelWithFontName:(NSString *)fontName;
 - (void)updateUI;
 - (NSString *)styleStringFromFlags:(NSUInteger)flags;
 - (NSUInteger)styleFlagsForFontName:(NSString *)fontName;

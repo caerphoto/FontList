@@ -18,13 +18,12 @@
                 <outlet property="backgroundColorWell" destination="rfy-Te-1TT" id="pNO-FN-vbh"/>
                 <outlet property="chkBold" destination="LOn-e2-oIE" id="Qjg-qK-J9e"/>
                 <outlet property="chkItalic" destination="2g1-gZ-doc" id="8v7-wI-vbK"/>
-                <outlet property="chkSyncPreview" destination="Nel-o1-aOn" id="o7l-Ho-vft"/>
-                <outlet property="detailedPreviewEditor" destination="noX-oh-bob" id="m1S-cU-Prb"/>
                 <outlet property="filterField" destination="7O5-J6-y5c" id="aI3-H5-awq"/>
                 <outlet property="fontSizeField" destination="PYA-H2-xpK" id="YKD-mG-3av"/>
                 <outlet property="fontSizeStepper" destination="qTh-g5-gPe" id="dFp-Z0-doB"/>
+                <outlet property="listViewContainer" destination="Ik9-Ru-aY8" id="XN4-Lc-qU3"/>
                 <outlet property="mainListView" destination="7C2-sN-7xq" id="tRY-iN-g0d"/>
-                <outlet property="previewPanel" destination="6v0-4b-3Ct" id="slY-ex-9Vt"/>
+                <outlet property="previewColumn" destination="tta-gu-K21" id="BRC-G5-0ul"/>
                 <outlet property="previewTextField" destination="du1-xn-zVc" id="DC4-EB-DxA"/>
                 <outlet property="statusBar" destination="kKk-i0-q8I" id="fTg-22-dIZ"/>
                 <outlet property="textColorWell" destination="uAR-uZ-wHK" id="eoZ-Me-6rC"/>
@@ -675,7 +674,7 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="Explorem Ipsum" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" frameAutosaveName="AFFontList" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="Explorem Ipsum" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" frameAutosaveName="AFFontList" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="830" y="692" width="648" height="530"/>
@@ -683,7 +682,7 @@
             <value key="minSize" type="size" width="648" height="119"/>
             <view key="contentView" autoresizesSubviews="NO" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="648" height="530"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="98" horizontalPageScroll="10" verticalLineScroll="98" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ik9-Ru-aY8">
                         <rect key="frame" x="0.0" y="21" width="648" height="445"/>
@@ -748,7 +747,7 @@
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
-                                                <customView id="zNV-PE-iAT" customClass="AFColoredTableCellView">
+                                                <customView wantsLayer="YES" id="zNV-PE-iAT" customClass="AFColoredTableCellView">
                                                     <rect key="frame" x="172" y="48" width="2000" height="96"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
@@ -768,7 +767,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="uYg-TV-umk" customClass="BKGradientView">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="uYg-TV-umk">
                         <rect key="frame" x="0.0" y="0.0" width="648" height="21"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kKk-i0-q8I">
@@ -940,78 +939,10 @@
                     <constraint firstItem="du1-xn-zVc" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="248" id="qhA-UU-DL4"/>
                 </constraints>
             </view>
+            <contentBorderThickness minY="22"/>
             <point key="canvasLocation" x="538" y="149"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="cGL-PJ-K6M"/>
-        <window title="Detailed Preview" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="FontListPreviewPanel" animationBehavior="default" id="6v0-4b-3Ct" customClass="NSPanel">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES" texturedBackground="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="272" y="172" width="444" height="378"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
-            <view key="contentView" id="UPk-g2-C7A">
-                <rect key="frame" x="0.0" y="0.0" width="444" height="378"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ki9-Ax-yjM">
-                        <rect key="frame" x="4" y="4" width="436" height="346"/>
-                        <clipView key="contentView" id="tu5-p9-aRJ">
-                            <rect key="frame" x="1" y="1" width="223" height="133"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <textView importsGraphics="NO" richText="NO" findStyle="panel" allowsDocumentBackgroundColorChange="YES" allowsUndo="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="noX-oh-bob">
-                                    <rect key="frame" x="0.0" y="0.0" width="223" height="372"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="419" height="344"/>
-                                    <size key="maxSize" width="463" height="10000000"/>
-                                    <attributedString key="textStorage">
-                                        <fragment>
-                                            <string key="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-                                            <attributes>
-                                                <font key="NSFont" size="11" name="ArialMT"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="14" lineHeightMultiple="1" defaultTabInterval="36">
-                                                    <tabStops/>
-                                                </paragraphStyle>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="419" height="344"/>
-                                    <size key="maxSize" width="463" height="10000000"/>
-                                    <accessibility description="An editable preview using the specified font and colours."/>
-                                </textView>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="rw9-W3-eSf">
-                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="e4S-lM-Y0r">
-                            <rect key="frame" x="224" y="1" width="15" height="133"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                    </scrollView>
-                    <button toolTip="Even if unchecked, double-clicking a font will still update this window to use that font" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Nel-o1-aOn">
-                        <rect key="frame" x="2" y="356" width="262" height="18"/>
-                        <buttonCell key="cell" type="check" title="Synchronise appearance with main list" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" state="on" inset="2" id="Sng-9Y-a1S">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="synchronizePreview:" target="Voe-Tx-rLC" id="lVH-KQ-piS"/>
-                        </connections>
-                    </button>
-                </subviews>
-                <constraints>
-                    <constraint firstAttribute="bottom" secondItem="ki9-Ax-yjM" secondAttribute="bottom" constant="4" id="5OW-Rt-lOI"/>
-                    <constraint firstItem="ki9-Ax-yjM" firstAttribute="top" secondItem="UPk-g2-C7A" secondAttribute="top" constant="28" id="AZG-Wd-W9p"/>
-                    <constraint firstAttribute="trailing" secondItem="ki9-Ax-yjM" secondAttribute="trailing" constant="4" id="Hah-Si-ta7"/>
-                    <constraint firstItem="ki9-Ax-yjM" firstAttribute="leading" secondItem="UPk-g2-C7A" secondAttribute="leading" constant="4" id="m5S-ct-p0a"/>
-                </constraints>
-            </view>
-            <point key="canvasLocation" x="616" y="416"/>
-        </window>
         <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="MN7-ZW-1zz" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="272" y="172" width="325" height="292"/>

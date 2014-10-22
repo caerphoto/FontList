@@ -10,7 +10,7 @@
 
 @interface AFColoredTableCellView : NSView
 
-@property (weak) NSColor *textColor;
+@property CGColorRef textColor;
 @property NSFont *previewFont;
 @property NSString *previewText;
 
