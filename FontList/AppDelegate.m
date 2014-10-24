@@ -112,16 +112,22 @@ NSUInteger taskCounter = 0;
 
 
 - (void)updateUI {
-    taskCounter += 1;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (taskCounter > 1) {
-            taskCounter -= 1;
-            return;
-        } else {
-            [self.mainListView reloadData];
-            taskCounter -= 1;
+    // Remeber which font was selected before changing filters, so it can be re-selected (probably with a different index) afterwards.
+    NSString *selectedFontName;
+    NSInteger index = self.mainListView.selectedRow;
+    if (index != -1) {
+        selectedFontName = [[self.filteredFontFamilies objectAtIndex:index] copy];
+    }
+
+    [self.mainListView reloadData];
+
+    if (selectedFontName) {
+        index = [self listIndexFromFontName:selectedFontName];
+        if (index != -1) {
+            [self.mainListView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+            [self.mainListView scrollRowToVisible:index];
         }
-    });
+    }
 
     [self saveSettings];
 }
@@ -213,13 +219,6 @@ NSUInteger taskCounter = 0;
 }
 
 - (void)applyFilters {
-    // Remeber which font was selected before changing filters, so it can be re-selected (probably with a different index) afterwards.
-    NSString *selectedFontName;
-    NSInteger index = self.mainListView.selectedRow;
-    if (index != -1) {
-        selectedFontName = [[self.filteredFontFamilies objectAtIndex:index] copy];
-    }
-
     NSUInteger filterFlags = 0;
 
     if (self.chkItalic.state == NSOnState) {
@@ -258,11 +257,6 @@ NSUInteger taskCounter = 0;
 
     [self updateUI];
 
-    index = [self listIndexFromFontName:selectedFontName];
-    if (index != -1) {
-        [self.mainListView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
-        [self.mainListView scrollRowToVisible:index];
-    }
 }
 
 - (NSFont *)fontFromCurrentStateWithName:(NSString *)fontName {
@@ -282,6 +276,8 @@ NSUInteger taskCounter = 0;
 - (IBAction)showPopupPreviewFor:(id)sender {
     NSString *familyName = [filteredFontFamilies objectAtIndex:[sender clickedRow]];
     PopupController *newPopup = [[PopupController alloc] initWithWindowNibName:@"PopupPreview"];
+
+    // Keep a reference to the window so it doesn't disappear when this function ends.
     [lstPreviewWindows addObject:newPopup];
 
     [newPopup showWindow:self];
@@ -291,6 +287,8 @@ NSUInteger taskCounter = 0;
     newPopup.backgroundColor = self.backgroundColorWell.color;
     newPopup.listIndex = lstPreviewWindows.count - 1;
     newPopup.windowList = lstPreviewWindows;
+
+    [newPopup.popupPreview makeKeyAndOrderFront:self];
 
 }
 

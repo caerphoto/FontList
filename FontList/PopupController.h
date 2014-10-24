@@ -10,7 +10,7 @@
 
 @interface PopupController : NSWindowController
 
-@property (weak) IBOutlet NSPanel *popupPreview;
+@property (weak) IBOutlet NSWindow *popupPreview;
 @property (unsafe_unretained) IBOutlet NSTextView *editor;
 
 @property NSFont *font;

@@ -11,7 +11,6 @@
 @implementation AFColoredTableCellView
 
 @synthesize previewText = _previewText;
-@synthesize previewFont = _previewFont;
 NSColor *nsTextColor;
 
 - (CGColorRef)textColor {
@@ -20,23 +19,6 @@ NSColor *nsTextColor;
 
 - (void)setTextColor:(CGColorRef)newColor {
     nsTextColor = [NSColor colorWithCGColor:newColor];
-}
-
-- (NSFont *)previewFont {
-    return _previewFont;
-}
-
-- (void)setPreviewFont:(NSFont *)theFont {
-    // IMPORTANT: ensure font is set BEFORE preview text, so that glyph subsitution works properly.
-    CGFloat size = theFont.pointSize;
-
-    // Create a font descriptor that specifies 'Andale Mono' as a fallback font.
-    NSFontDescriptor *fodFallback = [NSFontDescriptor fontDescriptorWithName: @"AndaleMono" size: size];
-
-    NSDictionary *dctCascade = [NSDictionary dictionaryWithObject: [NSArray arrayWithObject:fodFallback]
-                                                           forKey: NSFontCascadeListAttribute];
-    NSFontDescriptor *fodNew = [theFont.fontDescriptor fontDescriptorByAddingAttributes: dctCascade];
-    _previewFont = [NSFont fontWithDescriptor: fodNew size: size];
 }
 
 - (NSString *)previewText {
