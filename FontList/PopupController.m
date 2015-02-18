@@ -9,7 +9,10 @@
 #import "PopupController.h"
 
 @interface PopupController ()
-
+{
+    @private
+    NSArray *postScriptStyles;
+}
 @end
 
 @implementation PopupController
@@ -18,34 +21,70 @@
 @synthesize textColor = _textColor;
 @synthesize backgroundColor = _backgroundColor;
 
+
 - (void)windowDidLoad {
     [super windowDidLoad];
+    //[self.popupPreview setLevel:NSNormalWindowLevel];
+    //self.popupPreview.excludedFromWindowsMenu = NO;
 }
 
 - (NSFont *)font {
     return _font;
 }
 
+- (NSArray *)postScriptNamesFromStyles:(NSArray *) styles {
+    NSMutableArray *psNames = [[NSMutableArray alloc] init];
+
+    for (NSArray *style in styles) {
+        NSString *styleName = style[0];
+        [psNames addObject:styleName];
+    }
+    return psNames;
+}
+
+- (NSArray *)styleNamesFromStyles:(NSArray *) styles {
+    NSMutableArray *styleNames = [[NSMutableArray alloc] init];
+
+    for (NSArray *style in styles) {
+        NSString *styleName = style[1];
+        [styleNames addObject:styleName];
+    }
+    return styleNames;
+}
+
 - (void)setFont:(NSFont *)font {
-    NSMutableString *title;
     NSFontManager *fm = [NSFontManager sharedFontManager];
     self.editor.font = font;
+    NSArray *styles = [fm availableMembersOfFontFamily:font.familyName];
+    NSArray *styleNames = [self styleNamesFromStyles:styles];
+    NSInteger styleIndex = 0;
 
-    title = [font.familyName mutableCopy];
+    // Store the PS names for later retrieval by index when user selects from fontStyle popup button.
+    postScriptStyles = [self postScriptNamesFromStyles:styles];
+
+    [self.fontStylePopup removeAllItems];
+    [self.fontStylePopup addItemsWithTitles:styleNames];
+
+    self.fontSize.integerValue = font.pointSize;
+    self.fontSizeStepper.integerValue = self.fontSize.integerValue;
+
+    self.popupPreview.title = font.familyName;
+
+    /*
+    if (([fm traitsOfFont:font] & NSBoldFontMask & NSItalicFontMask) != 0) {
+        styleIndex = [styleNames indexOfObject:@"Bold Italic"];
+    }
 
     if (([fm traitsOfFont:font] & NSBoldFontMask) != 0) {
-        [title appendString:@" Bold"];
+        styleIndex = [styleNames indexOfObject:@"Bold"];
     }
 
     if (([fm traitsOfFont:font] & NSItalicFontMask) != 0) {
-        [title appendString:@" Italic"];
+        styleIndex = [styleNames indexOfObject:@"Italic"];
     }
-
-    CGFloat roundedSize = (CGFloat)round(font.pointSize * 10) / 10;
-
-    [title appendString:[NSString stringWithFormat:@", %gpt", roundedSize]];
-
-    self.popupPreview.title = title;
+     */
+    styleIndex = [postScriptStyles indexOfObject:font.fontName];
+    [self.fontStylePopup selectItemAtIndex:styleIndex];
 
     _font = self.editor.font;
 }
@@ -66,6 +105,23 @@
 - (void)setBackgroundColor:(NSColor *)backgroundColor {
     self.editor.backgroundColor = backgroundColor;
     _backgroundColor = self.editor.backgroundColor;
+}
+
+- (IBAction)takeFontStyleFrom:(id)sender {
+    NSInteger i = self.fontStylePopup.indexOfSelectedItem;
+    self.editor.font = [NSFont fontWithName:[postScriptStyles objectAtIndex:i] size:self.editor.font.pointSize];
+}
+
+- (IBAction)takeFontSizeFrom:(id)sender {
+    NSInteger newValue = [sender integerValue];
+
+    if ([[sender identifier] isEqualToString:@"field"]) {
+        self.fontSizeStepper.integerValue = newValue;
+    } else {
+        self.fontSize.integerValue = newValue;
+    }
+
+    self.editor.font = [NSFont fontWithName:self.editor.font.fontName size: newValue];
 }
 
 @end

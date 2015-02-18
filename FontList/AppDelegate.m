@@ -101,7 +101,7 @@ NSUInteger taskCounter = 0;
         return -1;
     }
 
-    for (NSUInteger index = 0; index < self.filteredFontFamilies.count; index += 1) {
+    for (NSUInteger index = 0; index < self.mainListView.numberOfRows; index += 1) {
         if ([self.filteredFontFamilies[index] isEqualToString:fontName]) {
             return index;
         }
@@ -116,7 +116,7 @@ NSUInteger taskCounter = 0;
     NSString *selectedFontName;
     NSInteger index = self.mainListView.selectedRow;
     if (index != -1) {
-        selectedFontName = [[self.filteredFontFamilies objectAtIndex:index] copy];
+        selectedFontName = [[self.mainListView viewAtColumn:1 row:index makeIfNecessary:NO] previewFont].familyName;
     }
 
     [self.mainListView reloadData];
@@ -344,7 +344,7 @@ NSUInteger taskCounter = 0;
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)mainFontList {
     NSUInteger count = [filteredFontFamilies count];
-    self.statusBar.stringValue = [NSString stringWithFormat:@"%lu fonts", (unsigned long)count];
+    self.statusBar.stringValue = [NSString stringWithFormat:@"%lu font families", (unsigned long)count];
     return count;
 }
 

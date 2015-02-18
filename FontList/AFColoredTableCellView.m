@@ -26,7 +26,7 @@ NSColor *nsTextColor;
 }
 
 - (void)setPreviewText:(NSString *)theText {
-    // Replace missing glyphs in string with white squares (which has been checked to exist in the fallback font's glyph set, but might also be present in the target font).
+    // Replace missing glyphs in string with white squares.
     NSUInteger textLength = theText.length;
     unichar chars[textLength];
     [theText getCharacters:chars range:NSMakeRange(0, textLength)];
