@@ -39,6 +39,7 @@
 - (IBAction)styleFilterWasChangedBy:(id)sender;
 - (IBAction)showPopupPreviewFor:(id)sender;
 - (IBAction)reloadFonts:(id)sender;
+- (IBAction)viewInFontBook:(id)sender;
 
 - (IBAction)showAboutWindow:(id)sender;
 

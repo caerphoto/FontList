@@ -148,6 +148,8 @@ NSUInteger taskCounter = 0;
     [self.mainListView setBackgroundColor:self.backgroundColorWell.color];
 
     [self.aboutIcon setImage:[NSApp applicationIconImage]];
+    //NSAttributedString *s = [NSAttributedString alloc];
+    //[s initWithString:@"http://andyf.me"];
 
     self.lstPreviewWindows = [[NSMutableArray alloc] init];
 
@@ -169,25 +171,25 @@ NSUInteger taskCounter = 0;
             result = @"";
             break;
         case 1:
-            result = @"\n✓ Italic";
+            result = @"\n✓ i";
             break;
         case 2:
-            result = @"\n✓ Bold";
+            result = @"\n✓ B";
             break;
         case 3:
-            result = @"\n✓ Bold, Italic";
+            result = @"\n✓ B, i";
             break;
         case 4:
-            result = @"\n✓ BoldItalic";
+            result = @"\n✓ Bi";
             break;
         case 5:
-            result = @"\n✓ Italic, BoldItalic";
+            result = @"\n✓ i, Bi";
             break;
         case 6:
-            result = @"\n✓ Bold, BoldItalic";
+            result = @"\n✓ B, Bi";
             break;
         case 7:
-            result = @"\n✓ Bold, Italic, BoldItalic";
+            result = @"\n✓ B, i, Bi";
             break;
         default:
             result = @" ?";
@@ -295,6 +297,46 @@ NSUInteger taskCounter = 0;
 - (IBAction)reloadFonts:(id)sender {
     [self fetchFontFamilies];
     [self applyFilters];
+}
+
+- (IBAction)viewInFontBook:(id)sender {
+    [[NSWorkspace sharedWorkspace]launchApplication:@"Font Book"];
+    NSString *familyName = [filteredFontFamilies objectAtIndex:self.mainListView.selectedRow];
+    NSString *scriptSrc = @"\
+tell application \"Font Book\"\n\
+    set selected font families to { font family \"#\" }\n\
+end tell";
+
+    scriptSrc = [scriptSrc stringByReplacingOccurrencesOfString:@"#" withString:familyName];
+    NSAppleScript *script = [[NSAppleScript alloc] initWithSource:scriptSrc];
+    NSDictionary *compileError;
+    NSDictionary *executeError;
+    BOOL result;
+    result = [script compileAndReturnError:&compileError];
+    if (compileError) {
+        NSLog(@"Error compiling. Script source:");
+        NSLog([@"\n" stringByAppendingString:scriptSrc]);
+        NSLog([compileError description]);
+    } else {
+        [script executeAndReturnError:&executeError];
+        if (executeError) {
+            NSLog(@"Error executing. Script Source:");
+            NSLog([@"\n" stringByAppendingString:scriptSrc]);
+            NSLog([executeError description]);
+
+            NSAlert *alert = [[NSAlert alloc] init];
+            NSString *errorMessage = @"There was a problem telling Font Book to show the selected font.";
+            NSNumber *errorNumber = [executeError objectForKey:NSAppleScriptErrorNumber];
+            if ([errorNumber integerValue] == -600) {
+                errorMessage = [errorMessage stringByAppendingString:@"\n\nThis is a rare problem with System Events, and unfortunately there’s not much that can be done about it except restarting your Mac."];
+            }
+            [alert addButtonWithTitle:@"OK"];
+            [alert setMessageText:@"Problem showing font"];
+            [alert setInformativeText:errorMessage];
+            [alert setAlertStyle:NSWarningAlertStyle];
+            [alert runModal];
+        }
+    }
 }
 
 - (IBAction)showAboutWindow:(id)sender {
