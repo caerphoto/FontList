@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1077" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -26,6 +26,8 @@
                 <outlet property="mainListView" destination="7C2-sN-7xq" id="tRY-iN-g0d"/>
                 <outlet property="previewColumn" destination="tta-gu-K21" id="BRC-G5-0ul"/>
                 <outlet property="previewTextField" destination="du1-xn-zVc" id="DC4-EB-DxA"/>
+                <outlet property="reloadButton" destination="kTD-p9-qZH" id="ELY-gO-vuM"/>
+                <outlet property="reloadingSpinner" destination="vzJ-2J-M2l" id="cEi-FS-Dam"/>
                 <outlet property="statusBar" destination="kKk-i0-q8I" id="fTg-22-dIZ"/>
                 <outlet property="textColorWell" destination="uAR-uZ-wHK" id="eoZ-Me-6rC"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
@@ -633,7 +635,7 @@
                                     <action selector="reloadFonts:" target="Voe-Tx-rLC" id="e5z-ig-jT0"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="View in Font Book" keyEquivalent="f" id="rg3-mV-2Yo">
+                            <menuItem title="View in Font Book" hidden="YES" enabled="NO" keyEquivalent="f" id="rg3-mV-2Yo">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                 <connections>
                                     <action selector="viewInFontBook:" target="Voe-Tx-rLC" id="rwM-U6-NFy"/>
@@ -681,11 +683,11 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="Explorem Ipsum" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" frameAutosaveName="AFFontList" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="Explorem Ipsum" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" frameAutosaveName="AFFontList" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="830" y="692" width="648" height="530"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <value key="minSize" type="size" width="648" height="119"/>
             <view key="contentView" autoresizesSubviews="NO" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="648" height="530"/>
@@ -699,6 +701,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="hXT-Se-f1V"/>
                                 </constraints>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="z7h-Vq-FTk">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -711,6 +714,7 @@
                                     <size key="offset" width="0.0" height="1"/>
                                     <color key="color" white="0.0" alpha="0.48999999999999999" colorSpace="calibratedWhite"/>
                                 </shadow>
+                                <animations/>
                                 <buttonCell key="cell" type="bevel" title="↻" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="xBj-AG-WTA">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -719,6 +723,10 @@
                                     <action selector="reloadFonts:" target="Voe-Tx-rLC" id="GDw-H9-FKU"/>
                                 </connections>
                             </button>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="vzJ-2J-M2l">
+                                <rect key="frame" x="5" y="3" width="16" height="16"/>
+                                <animations/>
+                            </progressIndicator>
                         </subviews>
                         <constraints>
                             <constraint firstItem="kKk-i0-q8I" firstAttribute="leading" secondItem="uYg-TV-umk" secondAttribute="leading" id="6Ac-98-M8z"/>
@@ -726,9 +734,11 @@
                             <constraint firstAttribute="bottom" secondItem="kKk-i0-q8I" secondAttribute="bottom" id="RA0-up-6A4"/>
                             <constraint firstAttribute="height" constant="21" id="xiP-uU-iwf"/>
                         </constraints>
+                        <animations/>
                     </customView>
                     <colorWell identifier="TextColor" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uAR-uZ-wHK">
                         <rect key="frame" x="221" y="506" width="44" height="23"/>
+                        <animations/>
                         <color key="color" red="0.16680676284615381" green="0.20923297746359548" blue="0.3296055947580645" alpha="1" colorSpace="deviceRGB"/>
                         <accessibility description="Select a colour for the preview text"/>
                         <connections>
@@ -738,6 +748,7 @@
                     </colorWell>
                     <button toolTip="Show preview text in bold (fonts with no bold weight will not be shown)" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LOn-e2-oIE">
                         <rect key="frame" x="18" y="511" width="50" height="18"/>
+                        <animations/>
                         <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" inset="2" id="bNB-L3-4Zv">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -748,6 +759,7 @@
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4EI-AW-fOu">
                         <rect key="frame" x="136" y="512" width="79" height="17"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text colour:" id="7gS-TH-cFS">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -756,6 +768,7 @@
                     </textField>
                     <button toolTip="Show preview text in italic (fonts with no italic style will not be shown)" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2g1-gZ-doc">
                         <rect key="frame" x="72" y="511" width="52" height="18"/>
+                        <animations/>
                         <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" inset="2" id="NC7-uR-1aq">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -766,6 +779,7 @@
                     </button>
                     <textField identifier="FontSizeField" toolTip="Set preview font size" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYA-H2-xpK">
                         <rect key="frame" x="89" y="474" width="46" height="22"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" title="30" drawsBackground="YES" id="GAM-ZP-xTG">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="9nC-Dz-uu3"/>
                             <font key="font" metaFont="system"/>
@@ -779,6 +793,7 @@
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eel-qV-Og1">
                         <rect key="frame" x="18" y="476" width="65" height="17"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font size:" id="SDe-bV-vlb">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -787,18 +802,20 @@
                     </textField>
                     <stepper identifier="FontSizeStepper" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTh-g5-gPe">
                         <rect key="frame" x="133" y="471" width="19" height="27"/>
+                        <animations/>
                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="500" doubleValue="30" id="y0K-oJ-kmf"/>
                         <accessibility description="Increments or decrements the preview font size by 1 point"/>
                         <connections>
                             <action selector="takeFontSizeFrom:" target="Voe-Tx-rLC" id="wY7-9t-HKH"/>
                         </connections>
                     </stepper>
-                    <searchField toolTip="Search for fonts by name (supports regular expression syntax)" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7O5-J6-y5c">
+                    <searchField toolTip="Search for fonts by name (supports regular expression syntax)" wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7O5-J6-y5c">
                         <rect key="frame" x="466" y="507" width="173" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="2mk-z7-qFJ"/>
                             <constraint firstAttribute="width" constant="173" id="I65-Pr-O1O"/>
                         </constraints>
+                        <animations/>
                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="All" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="Fmf-yA-re2">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -811,19 +828,30 @@
                     </searchField>
                     <textField identifier="PreviewTextField" toolTip="Text to display in preview" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="du1-xn-zVc">
                         <rect key="frame" x="248" y="474" width="391" height="22"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="wao-sc-rl9">
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" placeholderString="" drawsBackground="YES" usesSingleLineMode="YES" id="wao-sc-rl9">
                             <font key="font" metaFont="system"/>
-                            <string key="placeholderString">Explorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <connections>
+                                <binding destination="Voe-Tx-rLC" name="value" keyPath="self.previewText" id="PLn-nM-00J">
+                                    <dictionary key="options">
+                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                        <string key="NSNullPlaceholder">Explorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                    </dictionary>
+                                </binding>
+                            </connections>
                         </textFieldCell>
                         <connections>
                             <accessibilityConnection property="title" destination="X9U-22-E5Q" id="G1j-xs-YcO"/>
-                            <action selector="takePreviewTextFrom:" target="Voe-Tx-rLC" id="CqX-a4-sJ4"/>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NhO-9w-4n1">
                         <rect key="frame" x="272" y="512" width="127" height="17"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Background colour:" id="fRZ-OH-d3U">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -832,6 +860,7 @@
                     </textField>
                     <colorWell identifier="BackgroundColor" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfy-Te-1TT">
                         <rect key="frame" x="405" y="506" width="44" height="23"/>
+                        <animations/>
                         <color key="color" red="1" green="0.99694169620404094" blue="0.96572580645161288" alpha="1" colorSpace="deviceRGB"/>
                         <accessibility description="Select a colour for the font list background"/>
                         <connections>
@@ -841,6 +870,7 @@
                     </colorWell>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X9U-22-E5Q">
                         <rect key="frame" x="157" y="476" width="85" height="17"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Preview text:" id="3Nc-gP-gj8">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -854,9 +884,11 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView toolTip="Double-click to open a multi-line preview window" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="96" rowSizeStyle="automatic" viewBased="YES" floatsGroupRows="NO" id="7C2-sN-7xq">
+                                    <rect key="frame" x="0.0" y="0.0" width="646" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
                                     <size key="intercellSpacing" width="3" height="2"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn identifier="NameColumn" editable="NO" width="234" minWidth="40" maxWidth="1000" id="SNG-mj-JeE">
@@ -875,8 +907,9 @@
                                                     <rect key="frame" x="1" y="1" width="234" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ie6-V9-Okj">
-                                                            <rect key="frame" x="0.0" y="0.0" width="231" height="14"/>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ie6-V9-Okj">
+                                                            <rect key="frame" x="0.0" y="0.0" width="233" height="14"/>
+                                                            <animations/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingMiddle" enabled="NO" allowsUndo="NO" alignment="right" title="Table View Cell" id="oGo-ll-njh" customClass="RSVerticallyCenteredTextFieldCell">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -890,6 +923,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="ie6-V9-Okj" secondAttribute="bottom" id="sbJ-oZ-gZm"/>
                                                         <constraint firstItem="ie6-V9-Okj" firstAttribute="top" secondItem="O6V-M9-5PO" secondAttribute="top" id="ztA-Go-Tdz"/>
                                                     </constraints>
+                                                    <animations/>
                                                     <connections>
                                                         <outlet property="textField" destination="ie6-V9-Okj" id="BZU-UX-aBv"/>
                                                     </connections>
@@ -912,21 +946,26 @@
                                                 <customView id="zNV-PE-iAT" customClass="AFColoredTableCellView">
                                                     <rect key="frame" x="238" y="1" width="300" height="96"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <animations/>
                                                 </customView>
                                             </prototypeCellViews>
                                         </tableColumn>
                                     </tableColumns>
                                 </tableView>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
+                        <animations/>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="XgU-yY-heH">
                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <animations/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="gfF-xK-f6V">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <animations/>
                         </scroller>
                     </scrollView>
                 </subviews>
@@ -944,6 +983,7 @@
                     <constraint firstItem="du1-xn-zVc" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="34" id="qBg-YR-9pr"/>
                     <constraint firstItem="du1-xn-zVc" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="248" id="qhA-UU-DL4"/>
                 </constraints>
+                <animations/>
             </view>
             <contentBorderThickness minY="22"/>
             <point key="canvasLocation" x="538" y="149"/>
@@ -952,13 +992,14 @@
         <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="MN7-ZW-1zz" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="272" y="172" width="325" height="242"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="yi5-TN-11Q">
                 <rect key="frame" x="0.0" y="0.0" width="325" height="242"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk5-gP-qmv">
                         <rect key="frame" x="95" y="67" width="134" height="19"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Explorem Ipsum" id="lW7-5g-yKS">
                             <font key="font" metaFont="systemBold" size="15"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -967,6 +1008,7 @@
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sAr-bM-0Ox">
                         <rect key="frame" x="96" y="42" width="133" height="17"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version 1.1.3" id="beY-V4-MRj">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -975,10 +1017,12 @@
                     </textField>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KCv-WH-FBK">
                         <rect key="frame" x="108" y="94" width="128" height="128"/>
+                        <animations/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="NGh-dW-kCY"/>
                     </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8uK-kI-3Mm">
                         <rect key="frame" x="18" y="20" width="289" height="14"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Copyright © 2014 Andrew Farrell. All rights reserved." id="26K-dV-BYN">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -986,8 +1030,9 @@
                         </textFieldCell>
                     </textField>
                 </subviews>
+                <animations/>
             </view>
-            <point key="canvasLocation" x="571.5" y="612"/>
+            <point key="canvasLocation" x="559.5" y="614"/>
         </window>
     </objects>
     <resources>

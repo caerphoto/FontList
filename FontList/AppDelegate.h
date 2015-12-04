@@ -20,6 +20,8 @@
 @property (weak) IBOutlet NSButton *chkItalic;
 @property (weak) IBOutlet NSButton *chkBold;
 @property (weak) IBOutlet NSTextField *statusBar;
+@property (weak) IBOutlet NSButton *reloadButton;
+@property (weak) IBOutlet NSProgressIndicator *reloadingSpinner;
 
 @property (strong) NSMutableArray *lstPreviewWindows;
 
@@ -27,13 +29,13 @@
 @property (weak) IBOutlet NSImageView *aboutIcon;
 
 @property (copy) NSString *filterText;
-@property (copy) NSString *previewText;
+@property (nonatomic, copy) NSString *previewText;
 @property (copy) NSArray *fontFamilies;
 @property (copy) NSMutableArray *filteredFontFamilies;
 @property (assign) NSUInteger fontSize;
+@property (retain) NSTimer *previewTextTimer;
 
 - (IBAction)takeFilterFrom:(id)sender;
-- (IBAction)takePreviewTextFrom:(id)sender;
 - (IBAction)takeFontSizeFrom:(id)sender;
 - (IBAction)takeColorFrom:(NSColorWell *)sender;
 - (IBAction)styleFilterWasChangedBy:(id)sender;

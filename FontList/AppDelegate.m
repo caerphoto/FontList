@@ -22,21 +22,45 @@ NSUInteger taskCounter = 0;
 @implementation AppDelegate
 
 @synthesize filterText;
-@synthesize previewText;
+@synthesize previewText = _previewText;
 @synthesize fontSize;
 @synthesize fontFamilies;
 @synthesize filteredFontFamilies;
 @synthesize lstPreviewWindows;
 
+- (void)setPreviewText:(NSString *)previewText {
+    if (![_previewText isEqualToString:previewText]) {
+        _previewText = previewText;
+
+        if (self.previewTextTimer != nil) {
+            [self.previewTextTimer invalidate];
+            self.previewTextTimer = nil;
+        }
+
+        self.previewTextTimer = [NSTimer scheduledTimerWithTimeInterval: 0.7
+            target: self
+            selector:@selector(updateUI)
+            userInfo: nil repeats:NO];
+    }
+}
+
+- (NSString *)getPreviewText {
+    if (self.previewTextField.stringValue.length == 0) {
+        return nil;
+    } else {
+        return _previewText;
+    }
+}
+
 - (void)loadSettings {
     // Load various saved settings (or use defaults)
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 
-    previewText = [settings stringForKey:@"previewText"];
-    if (previewText == nil) {
-        previewText = [[self.previewTextField cell] placeholderString];
-    } else {
-        self.previewTextField.stringValue = previewText;
+    self.previewText = [settings stringForKey:@"previewText"];
+
+
+    if (self.previewText != nil) {
+        self.previewTextField.stringValue = self.previewText;
     }
 
     filterText = [settings stringForKey:@"filterText"];
@@ -80,10 +104,10 @@ NSUInteger taskCounter = 0;
         [settings setObject:self.filterField.stringValue forKey:@"filterText"];
     }
 
-    if ([self.previewTextField.stringValue isEqualToString:@""]) {
+    if ([self.previewText isEqualToString:@""]) {
         [settings removeObjectForKey:@"previewText"];
     } else {
-        [settings setObject:self.previewTextField.stringValue forKey:@"previewText"];
+        [settings setObject:self.previewText forKey:@"previewText"];
     }
 
     [settings setInteger:self.fontSizeStepper.integerValue forKey:@"fontSize"];
@@ -141,6 +165,8 @@ NSUInteger taskCounter = 0;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [self.window makeFirstResponder:self.mainListView];
+
     [self fetchFontFamilies];
     [self loadSettings];
     [self applyFilters];
@@ -156,11 +182,16 @@ NSUInteger taskCounter = 0;
     [self.mainListView setDelegate:(id)self];
     [self.mainListView setDataSource:(id)self];
     [self.mainListView setDoubleAction:@selector(showPopupPreviewFor:)];
+
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     [self saveSettings];
     fontFamilies = nil;
+}
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
+    return YES;
 }
 
 - (NSString *)styleStringFromFlags:(NSUInteger)flags {
@@ -171,25 +202,25 @@ NSUInteger taskCounter = 0;
             result = @"";
             break;
         case 1:
-            result = @"\n✓ i";
+            result = @"\ni";
             break;
         case 2:
-            result = @"\n✓ B";
+            result = @"\nB";
             break;
         case 3:
-            result = @"\n✓ B, i";
+            result = @"\nB, i";
             break;
         case 4:
-            result = @"\n✓ Bi";
+            result = @"\nBi";
             break;
         case 5:
-            result = @"\n✓ i, Bi";
+            result = @"\ni, Bi";
             break;
         case 6:
-            result = @"\n✓ B, Bi";
+            result = @"\nB, Bi";
             break;
         case 7:
-            result = @"\n✓ B, i, Bi";
+            result = @"\nB, i, Bi";
             break;
         default:
             result = @" ?";
@@ -295,8 +326,16 @@ NSUInteger taskCounter = 0;
 }
 
 - (IBAction)reloadFonts:(id)sender {
+    [self.reloadButton setEnabled:NO];
+    [self.reloadButton setTransparent:YES];
+    [self.reloadingSpinner startAnimation:NULL];
+
     [self fetchFontFamilies];
     [self applyFilters];
+
+    [self.reloadingSpinner stopAnimation:NULL];
+    [self.reloadButton setEnabled:YES];
+    [self.reloadButton setTransparent:NO];
 }
 
 - (IBAction)viewInFontBook:(id)sender {
@@ -348,16 +387,6 @@ end tell";
     [self applyFilters];
 }
 
-- (IBAction)takePreviewTextFrom:(id)sender {
-    NSString *newText = [sender stringValue];
-    if (newText != nil && [newText length] == 0) {
-        newText = [self.previewTextField.cell placeholderString];
-    }
-    previewText = newText;
-
-    [self updateUI];
-}
-
 - (IBAction)takeFontSizeFrom:(id)sender {
     NSInteger newValue = [sender integerValue];
 
@@ -401,6 +430,13 @@ end tell";
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
 
     NSString *fontName = [filteredFontFamilies objectAtIndex:row];
+    NSString *previewText = self.previewText;
+
+    if (previewText == nil || [previewText isEqualToString:@""]) {
+        NSDictionary *bindingInfo = [self.previewTextField.cell infoForBinding:@"value"];
+        NSDictionary *options = [bindingInfo valueForKey:NSOptionsKey];
+        previewText = [options valueForKey:NSNullPlaceholderBindingOption];
+    }
 
     if ([tableColumn.identifier isEqualToString:@"NameColumn"]) {
         NSTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
